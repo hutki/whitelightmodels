@@ -3,6 +3,12 @@
 
 $face_options = '';
 $hair_options = '';
+$l_hair_options = '';
+$eyes_array_options = '';
+$breast_size_array_options = '';
+$work_array_options = '';
+$language_array_options = '';
+$abroad_array_options = '';
 
 
 
