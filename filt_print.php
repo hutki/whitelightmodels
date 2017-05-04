@@ -1,12 +1,13 @@
+
 <?php
-$get_print = (isset($_GET['print']))?$_GET['print']:'';
+//сравниваем, существует ли в $_GET print_id и выводим результат для чанка
 
- foreach ($get_print as $get_print){
-$result .= $get_print.',';
+$pattern = '/^print_[0-9]+$/';
+foreach($_GET as $key => $value)
+{
+if(preg_match($pattern, $key))
+	$result .= $value.',';
+}
+$result = substr($result, 0, -1);
 
- }
-
-
-$result  = substr($result, 0, -1);
-var_dump(get_print);
-return $result;
+echo $result;
