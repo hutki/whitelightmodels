@@ -213,11 +213,9 @@ break;
     ($val['expert'] == $expert || !isset($val['expert']) || empty($expert) || !isset($expert)) &&
   //клиент
      ($val['client'] == $client || !isset($val['client']) || empty($client) || !isset($client)) &&
+  //анкеты с пустыми полями
      (!isset($val['language']) == $clean_p || empty($clean_p) || !isset($clean_p))
-     //анкеты с пустыми полями
- 
-
-
+    
     ) // Если соответствует двум параметрам сразу
 
          $docs_ids .=  $key.',';
