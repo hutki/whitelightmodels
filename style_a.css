@@ -68,9 +68,10 @@ label#active_gender_man, label#active_gender_woman{background:#fff;border: 1px s
 .exp_inp span {float:left;margin: 6px 5px 0 0;width: 236px;height:22px;padding-left: 10px;font-weight: 600}
 .exp_inp .range_inp input {width: 50px;right:10px}
 .butt_block{text-align: center;}
-#pokazat{width:250px;text-transform: uppercase;background: #ff920c;color: #fff;padding: 19px 0;font-size: 20px;border:none;margin-top:10px;border-radius: 7px;cursor: pointer}
 #reset{display:block;background: none; border:none; color:#ff920c; text-align: center;margin-top: 15px;text-decoration: underline;font-size: 14px}
 .fmod_filt {float:left;margin: 30px 29px 15px; text-align:center;}
 .fmod_filt a {display: block;}
 .fmod_filt .mname {color: #333;background: #ff920c;padding: 12px 0;font-size: 18px;font-weight: 600;}
-.button_block button;
+.butt_block button  {width:250px;text-transform: uppercase;background: #ff920c;color: #fff;padding: 19px 0;font-size: 20px;border:none;margin-top:10px;border-radius: 7px;cursor: pointer}
+#print  {display: block; width:250px;text-transform: uppercase;background: #ff920c;color: #fff;padding: 19px 0;font-size: 20px;border:none;margin-top:10px;border-radius: 7px;cursor: pointer}
+.butt_block {float: left; }
