@@ -37,7 +37,7 @@ header{margin-bottom: 15px}
 .navbg{width:100%;line-height:45px;text-align:right;background:#FF930d;top:-45px;-webkit-transition:all .3s ease;-moz-transition:all .3s ease;-o-transition:all .3s ease;-ms-transition:all .3s ease;z-index:100}
 nav{width:1140px;margin:0 auto;color:#fff;font-size: 18px;}
 .logo77{background:url(/images/logoblack.png) no-repeat center;height:78px;width:78px;float:left;background-size:78px;margin-top:13px;}
-.lhead{width:290px;float:left;padding:34px 0 0 20px}
+.lhead{width:235px;float:left;padding:34px 0 0 20px}
 .lname{font-size:18px;font-weight:600;display:inline-block;width:238px;vertical-align:top}
 .lname span{display:block;font-weight:300;font-size:9px}
 .count_a{text-align:right;margin-top:55px;display: inline-block;position: absolute;right:0;}
@@ -73,5 +73,21 @@ label#active_gender_man, label#active_gender_woman{background:#fff;border: 1px s
 .fmod_filt a {display: block;}
 .fmod_filt .mname {color: #333;background: #ff920c;padding: 12px 0;font-size: 18px;font-weight: 600;}
 .butt_block button  {width:250px;text-transform: uppercase;background: #ff920c;color: #fff;padding: 19px 0;font-size: 20px;border:none;margin-top:10px;border-radius: 7px;cursor: pointer}
-#print  {display: block; width:250px;text-transform: uppercase;background: #ff920c;color: #fff;padding: 19px 0;font-size: 20px;border:none;margin-top:10px;border-radius: 7px;cursor: pointer}
-.butt_block {float: left; }
+.upload {float: left;width: 78%;}
+#print  {display: block; width:250px;text-transform: uppercase;background: #ff920c;color: #fff;margin: 0 auto;padding: 19px 0;font-size: 20px;border:none;margin-top:10px;border-radius: 7px;cursor: pointer}
+.tel_print{float: left;font-weight: 400;margin-top: 50px; text-align: left;}
+.tel_print p {font-size: 25px;margin: 0;}
+.print {padding-bottom: 0} 
+.print header {margin-bottom:0;}
+.gallery_p {width: 427px; overflow: hidden;}
+.gallery_p img {float: left}
+.gallery_p img:nth-child(1){margin-right: 17px}
+.gallery_p img:nth-child(2){margin-bottom: 30px}
+.gallery_p img:nth-child(1n+2){width: 130px}
+.content_p{float:left;width:40%; padding-right:20px; line-height: 1.3;}
+.content_p h3{font-size:30px; margin:0 0 23px 0;width: 163px;border-bottom: 1px solid}
+.content_p span {font-size: 17px; display: inline-block;}
+.block_1 span:nth-child(1n+2){width: 80px}
+.block_2 span:nth-child(1n+2){width: 125px}
+.block_3 span:nth-child(1n+2){width: 245px}
+.block_4 span:nth-child(1n+2){width: 245px}
