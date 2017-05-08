@@ -215,14 +215,9 @@ break;
      ($val['client'] == $client || !isset($val['client']) || empty($client) || !isset($client)) &&
   //анкеты с пустыми полями
      (!isset($val['language']) == $clean_p || empty($clean_p) || !isset($clean_p))
-    
     ) // Если соответствует двум параметрам сразу
 
          $docs_ids .=  $key.',';
-
-
-
-
  }
  // Удаляем в конце запятую
  $docs_ids = substr($docs_ids, 0, -1);

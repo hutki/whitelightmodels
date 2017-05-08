@@ -46,8 +46,6 @@ $get_abroad = (isset($_GET['abroad']))?$_GET['abroad']:'';
 $get_expert = (isset($_GET['expert']))?$_GET['expert']:'';
 $get_client = (isset($_GET['client']))?$_GET['client']:'';
 
-if(!empty($_GET['face']))
-	$sel = 'style"background:red;"';
 
 
 // Формируем данные вывода
