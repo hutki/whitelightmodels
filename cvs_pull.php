@@ -1,5 +1,23 @@
 <?php
-$id = "3','27','29";
+function download_send_headers($filename) {
+    // disable caching
+    $now = gmdate("D, d M Y H:i:s");
+    header("Expires: Tue, 03 Jul 2001 06:00:00 GMT");
+    header("Cache-Control: max-age=0, no-cache, must-revalidate, proxy-revalidate");
+    header("Last-Modified: {$now} GMT");
+ 
+    // force download
+    header("Content-Type: application/force-download");
+    header("Content-Type: application/octet-stream");
+    header("Content-Type: application/download");
+ 
+    // disposition / encoding on response body
+    header("Content-Disposition: attachment;filename={$filename}");
+    header("Content-Transfer-Encoding: binary");
+}
+
+
+//$id = "3','27','29";
 
 
 
@@ -84,12 +102,30 @@ foreach ($docs_array as $key =>$value) {
 
 $titles = "Имя;Пол;Тип внешности;Цвет волос;Длина волос;Цвет глаз;Возраст;Рост;Грудь;Талия;Бедра;Вес;Размер груди;Размер одежды;Размер обуви;Опыт работы;Языки;Работа за рубежом;Оценка эксперта;Оценка эксперта;\r\n";
 $docs_ids = $titles .$docs_ids ;
-$docs_ids = str_replace(',', '.', $docs_ids);
+
+$docs_ids = str_replace(',', '.', $docs_ids); //запятую меняем на точку, тк , - разделитель в csv 3,5 не катит
 $docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
-$docs_ids = file_put_contents('test.csv', $docs_ids);
+
+$filename = 'data_export.csv';
 
 
-return  $docs_ids;
+// Открываем файл, флаг W означает - файл открыт на запись
+$f_hdl = fopen("php://output", 'w');
+
+// Записываем в файл $text
+fwrite($f_hdl, $docs_ids);
+
+
+
+// Закрывает открытый файл
+fclose($f_hdl);
+
+download_send_headers("data_export.csv");
+echo $text;
+die();
+
+
+//return  $docs_ids;
 /*echo "<pre>";
 var_dump($docs_ids);
 echo "</pre>";*/

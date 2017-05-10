@@ -9,23 +9,36 @@ $breast_size_array_options = '';
 $work_array_options = '';
 $language_array_options = '';
 $abroad_array_options = '';
-
-
-
+$face_class = '';
+$hair_class = '';
+$l_hair_class = '';
+$eyes_class = '';
+$breast_size_class = '';
+$work_class = '';
+$language_class = '';
+$abroad_class = '';
 // Получаем значения с GET
 $get_gender = (isset($_GET['gender']))?$_GET['gender']:'';
 
-if($get_gender == 'Муж'){
+if($get_gender == 'Муж')
 	$id_gender = 'active_gender_man';
-}else{
+if($get_gender == 'Жен')
 	$id_gender1 = 'active_gender_woman';
-}
+
 
 
 $get_face = (isset($_GET['face']))?$_GET['face']:'';
+if(!empty($get_face))
+$face_class = "select_active";
 $get_hair = (isset($_GET['hair']))?$_GET['hair']:'';
+if(!empty($get_hair))
+$hair_class = "select_active";
 $get_l_hair = (isset($_GET['l_hair']))?$_GET['l_hair']:'';
+if(!empty($get_l_hair))
+$l_hair_class = "select_active";
 $get_eyes = (isset($_GET['eyes']))?$_GET['eyes']:'';
+if(!empty($get_eyes))
+$eyes_class = "select_active";
 $get_age1 = (isset($_GET['age1']))?$_GET['age1']:'';
 $get_growth1 = (isset($_GET['growth1']))?$_GET['growth1']:'';
 $get_growth2 = (isset($_GET['growth2']))?$_GET['growth2']:'';
@@ -36,13 +49,21 @@ $get_waist2 = (isset($_GET['waist2']))?$_GET['waist2']:'';
 $get_hip1 = (isset($_GET['hip1']))?$_GET['hip1']:'';
 $get_hip2 = (isset($_GET['hip2']))?$_GET['hip2']:'';
 $get_breast_size = (isset($_GET['breast_size']))?$_GET['breast_size']:'';
+if(!empty($get_breast_size))
+$breast_size_class = "select_active";
 $get_clothing1 = (isset($_GET['clothing1']))?$_GET['clothing1']:'';
 $get_clothing2 = (isset($_GET['clothing2']))?$_GET['clothing2']:'';
 $get_shoes1 = (isset($_GET['shoes1']))?$_GET['shoes1']:'';
 $get_shoes2 = (isset($_GET['shoes2']))?$_GET['shoes2']:'';
 $get_work = (isset($_GET['work']))?$_GET['work']:'';
+if(!empty($get_work))
+$work_class = "select_active";
 $get_language = (isset($_GET['language']))?$_GET['language']:'';
+if(!empty($get_language))
+$language_class = "select_active";
 $get_abroad = (isset($_GET['abroad']))?$_GET['abroad']:'';
+if(!empty($get_abroad))
+$abroad_class = "select_active";
 $get_expert = (isset($_GET['expert']))?$_GET['expert']:'';
 $get_client = (isset($_GET['client']))?$_GET['client']:'';
 
@@ -58,7 +79,7 @@ $face_array = array(	array('option' => '', 'val' => 'Тип лица'),
 						array('option' => 'афро', 'val' => 'африканский'),
 						array('option' => 'метис', 'val' => 'метис'));
 $hair_array = array(	array('option' => '', 'val' => 'Цвет волос'),
-						array('option' => 'Блондин(ка', 'val' => 'светлый'),
+						array('option' => 'Блондин(ка)', 'val' => 'светлый'),
 						array('option' => 'русый', 'val' => 'русый'),
 						array('option' => 'Рыжий(ая)', 'val' => 'рыжий'),
 						array('option' => 'Шатен(ка)', 'val' => 'каштановый'),
@@ -134,24 +155,24 @@ foreach ($abroad_array as $val)
 
 $result = '<div class="l_block">
 <form action="" method="get" name="model">
-<select name="services">
+<select name="services" class="f_select">
 	<option>Вид работы</option>
 	<option value="услуги">наши услуги</option>
 </select>
 <div class="gender_block">
-	<label id="'.$id_gender.'" class="gender" for="men"><input type="radio" name="gender" id="men" value="Муж">Мужчина</label><span></span>
-	<label  id="'.$id_gender1.'" class="gender" for="women"><input type="radio"  checked="checked" name="gender" id="women" value="Жен">Женщина</label>
+	<label class="gender_man '.$id_gender.'" for="men"><input type="radio" name="gender" id="men" value="Муж">Мужчина</label><span></span>
+	<label class="gender_woman '.$id_gender1.'" for="women"><input type="radio"   name="gender" id="women" value="Жен">Женщина</label>
 </div>
-<select id="select1" name="face" '.$sel.'>
+<select class="f_select '.$face_class.'" name="face">
 	'.$face_options.'
 </select>
-<select name="hair">
+<select class="f_select '.$hair_class.'" name="hair">
 	'.$hair_options.'
 </select>
-<select name="l_hair">
+<select class="f_select '.$l_hair_class.'" name="l_hair">
 	'.$l_hair_options.'
 </select>
-<select name="eyes">
+<select class="f_select '.$eyes_class.'" name="eyes">
 	'.$eyes_array_options.'
 </select>
 <div class="block_inp">
@@ -196,7 +217,7 @@ $result = '<div class="l_block">
 		<input name="weight2" type="number" placeholder="до">
 	</div>
 </div>
-<select name="breast_size">
+<select class="f_select '.$breast_size_class.'" name="breast_size">
 	'.$breast_size_array_options.'
 </select>
 <div class="block_inp dress">
@@ -213,13 +234,13 @@ $result = '<div class="l_block">
 		<input name="shoes2" type="number" placeholder="до '.$get_shoes2.'">
 	</div>
 </div>
-<select name="work">
+<select class="f_select '.$work_class.'" name="work">
 	'.$work_array_options.'
 </select>
-<select name="language">
+<select class="f_select '.$language_class.'" name="language">
 	'.$language_array_options.'
 </select>
-<select name="abroad">
+<select class="f_select '.$abroad_class.'" name="abroad">
 	'.$abroad_array_options.'
 </select>
 <div class="dop_opt">
@@ -248,6 +269,5 @@ $result = '<div class="l_block">
 
 </form>
 </div>';
-
 
 print $result;
