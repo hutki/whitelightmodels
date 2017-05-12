@@ -1,82 +1,33 @@
 <?php
-if (isset($_GET['gender']))
-    $gender = $_GET['gender'];
 
-if (isset($_GET['face']))
-    $face = $_GET['face'];
-
-if (isset($_GET['hair']))
-    $hair = $_GET['hair'];
-
-if (isset($_GET['l_hair']))
-    $l_hair = $_GET['l_hair'];
-
-if (isset($_GET['eyes']))
-    $eyes = $_GET['eyes'];
-
-if (isset($_GET['age1']))
-    $age1 = $_GET['age1'];
-
-
-if (isset($_GET['age2']))
-    $age2 = $_GET['age2'];
-
-if (isset($_GET['growth1']))
-    $growth1 = $_GET['growth1'];
-
-if (isset($_GET['growth2']))
-    $growth2 = $_GET['growth2'];
-
-if (isset($_GET['chest1']))
-    $chest1 = $_GET['chest1'];
-
-if (isset($_GET['chest2']))
-    $chest2 = $_GET['chest2'];
-
-if (isset($_GET['waist1']))
-    $waist1 = $_GET['waist1'];
-
-if (isset($_GET['waist2']))
-    $waist2 = $_GET['waist2'];
-
-if (isset($_GET['hip1']))
-    $hip1 = $_GET['hip1'];
-
-if (isset($_GET['hip2']))
-    $hip2 = $_GET['hip2'];
-
-if (isset($_GET['breast_size']))
-    $breast_size = $_GET['breast_size'];
-
-if (isset($_GET['clothing1']))
-    $clothing1 = $_GET['clothing1'];
-
-if (isset($_GET['clothing2']))
-    $clothing2 = $_GET['clothing2'];
-
-if (isset($_GET['shoes1']))
-    $shoes1 = $_GET['shoes1'];
-
-if (isset($_GET['shoes2']))
-    $shoes2 = $_GET['shoes2'];
-
-if (isset($_GET['work']))
-    $work = $_GET['work'];
-
-if (isset($_GET['abroad']))
-    $abroad = $_GET['abroad'];
-
-if (isset($_GET['language']))
-    $language = $_GET['language'];
-
-if (isset($_GET['expert']))
-    $expert = $_GET['expert'];
-
-if (isset($_GET['client']))
-    $client = $_GET['client'];
-
-if (isset($_GET['clean_p']))
-    $clean_p = $_GET['clean_p'];
+$gender = (isset($_GET['gender']))?$_GET['gender']:'';
+$face = (isset($_GET['face']))?$_GET['face']:'';
+$hair = (isset($_GET['hair']))?$_GET['hair']:'';
+$l_hair = (isset($_GET['l_hair']))?$_GET['l_hair']:'';
+$eyes = (isset($_GET['eyes']))?$_GET['eyes']:'';
+$age1 = (isset($_GET['age1']))?$_GET['age1']:'';
+$age2 = (isset($_GET['age2']))?$_GET['age2']:'';
+$growth1 = (isset($_GET['growth1']))?$_GET['growth1']:'';
+$growth2 = (isset($_GET['growth2']))?$_GET['growth2']:'';
+$chest1 = (isset($_GET['chest1']))?$_GET['chest1']:'';
+$chest2 = (isset($_GET['chest2']))?$_GET['chest2']:'';
+$waist1 =(isset($_GET['waist1']))?$_GET['waist1']:'';
+$waist2 = (isset($_GET['waist2']))?$_GET['waist2']:'';
+$hip1 = (isset($_GET['hip1']))?$_GET['hip1']:'';
+$hip2 = (isset($_GET['hip2']))?$_GET['hip2']:'';
+$weight1 = (isset($_GET['weight1']))?$_GET['weight1']:'';
+$weight2 = (isset($_GET['weight2']))?$_GET['weight2']:'';
+$breast_size = (isset($_GET['breast_size']))?$_GET['breast_size']:'';
+$clothing1 = (isset($_GET['clothing1']))?$_GET['clothing1']:'';
+$clothing2 = (isset($_GET['clothing2']))?$_GET['clothing2']:'';
+$shoes1 = (isset($_GET['shoes1']))?$_GET['shoes1']:'';
+$shoes2 = (isset($_GET['shoes2']))?$_GET['shoes2']:'';
+$work = (isset($_GET['work']))?$_GET['work']:'';
+$abroad = (isset($_GET['abroad']))?$_GET['abroad']:'';
+$language = (isset($_GET['language']))?$_GET['language']:'';
+$expert =(isset($_GET['expert']))?$_GET['expert']:'';
+$client = (isset($_GET['client']))?$_GET['client']:'';
+$clean_p = (isset($_GET['clean_p']))?$_GET['clean_p']:'';
 
 //----------------------------------------------------------------------------
 
@@ -120,6 +71,9 @@ break;
 case 4: // Id tv параметра 'Бедра' 
 $docs_array[$data['contentid']]['hip1'] = $data['value'];
 break;
+case 47: // Id tv параметра 'Вес' 
+$docs_array[$data['contentid']]['weight1'] = $data['value'];
+break;
 case 11: // Id tv параметра 'Размер груди' 
 $docs_array[$data['contentid']]['breast_size'] = $data['value'];
 break;
@@ -135,7 +89,7 @@ break;
 case 18: // Id tv параметра 'abroad' 
 $docs_array[$data['contentid']]['abroad'] = $data['value'];
 break;
-case 15: // Id tv параметра 'language' !!!!!!!!!!!!!!!!!!!!!не workет
+case 15: // Id tv параметра 'language'
 $docs_array[$data['contentid']]['language'] = $data['value'];
 break;
 case 19: // Id tv параметра 'expert' 
@@ -144,7 +98,6 @@ break;
 case 20: // Id tv параметра 'expert' 
 $docs_array[$data['contentid']]['client'] = $data['value'];
 break;
-
 }
 }
  // Теперь у нас каждый документ имеет полный набор tv параметров!!!!
@@ -191,6 +144,11 @@ break;
      ((empty($hip2) || !isset($hip2)) && $val['hip1'] >= $hip1)||
      ((empty($hip2) || !isset($hip2)) && (empty($hip1) || !isset($hip1)))||
      ($val['hip1'] >= $hip1 && $val['hip1'] <= $hip2)) &&
+  //Вес
+  (((empty($weight1) || !isset($weight1)) && ($val['weight1'] >= 0 && $val['weight1'] <= $weight2)) ||
+     ((empty($weight2) || !isset($weight2)) && $val['weight1'] >= $weight1)||
+     ((empty($weight2) || !isset($weight2)) && (empty($weight1) || !isset($weight1)))||
+     ($val['weight1'] >= $weight1 && $val['weight1'] <= $weight2)) &&
   //размер груди
    ($val['breast_size'] == $breast_size || !isset($val['breast_size']) || empty($breast_size) || !isset($breast_size)) &&
   //размер одежды
