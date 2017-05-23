@@ -1,5 +1,5 @@
 <?php
-
+$s_id = (isset($_GET['s_id']))?$_GET['s_id']:'';
 $gender = (isset($_GET['gender']))?$_GET['gender']:'';
 $face = (isset($_GET['face']))?$_GET['face']:'';
 $hair = (isset($_GET['hair']))?$_GET['hair']:'';
@@ -177,6 +177,12 @@ break;
 
          $docs_ids .=  $key.',';
  }
+ //Выводим только по id
+ if (!empty($s_id)){
+   $docs_ids .= $s_id.',';
+ }
+
+ 
  // Удаляем в конце запятую
  $docs_ids = substr($docs_ids, 0, -1);
 

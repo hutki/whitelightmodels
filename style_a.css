@@ -34,8 +34,10 @@ body{font-family:'Proxima Nova',arial,sans-serif;margin:0;padding:0;color:#28282
 .i3{background-image:url(../images/i3.png);background-repeat:no-repeat;background-position:94% center}
 .wd114{max-width:1140px;margin:0 auto;position:relative;padding-bottom: 5px}
 header{margin-bottom: 15px}
-.navbg{width:100%;line-height:45px;text-align:right;background:#FF930d;top:-45px;-webkit-transition:all .3s ease;-moz-transition:all .3s ease;-o-transition:all .3s ease;-ms-transition:all .3s ease;z-index:100}
-nav{width:1140px;margin:0 auto;color:#fff;font-size: 18px;}
+.navbg{width:100%;line-height:45px;text-align:right;background:#FF930d;-webkit-transition:all .3s ease;-moz-transition:all .3s ease;-o-transition:all .3s ease;-ms-transition:all .3s ease;z-index:100}
+.navbg nav{width:1140px;margin:0 auto;color:#fff;font-size: 18px;position: relative;}
+.navbg nav span{padding-right:50px;}
+.navbg nav a {position: absolute;top: 6px;right: 0;}
 .logo77{background:url(/images/logoblack.png) no-repeat center;height:78px;width:78px;float:left;background-size:78px;margin-top:13px;}
 .lhead{width:235px;float:left;padding:34px 0 0 20px}
 .lname{font-size:18px;font-weight:600;display:inline-block;width:238px;vertical-align:top}
@@ -101,5 +103,9 @@ select.select_active{border: 1px solid rgb(255, 146, 12); box-shadow: rgb(240, 2
 .block_2 span:nth-child(1n+2){width: 125px}
 .block_3 span:nth-child(1n+2){width: 245px}
 .block_4 span:nth-child(1n+2){width: 245px}
-@media print {.break:nth-child(1n+2) {page-break-after: always;margin-top: 50px} 
+.block_5 {width:100%;margin-top: 20px}
+.block_5 span{width: 320px;margin-bottom: 10px}
+
+
+@media print {.break:nth-child(1n) {page-break-after: always;margin-top: 50px} 
    } 

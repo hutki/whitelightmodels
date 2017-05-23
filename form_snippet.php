@@ -21,7 +21,7 @@ $abroad_class = '';
 $get_gender = (isset($_GET['gender']))?$_GET['gender']:'';
 //$id_gender = ($get_gender == 'Муж' || 'Жен')?'active_gender':'';
 
-
+$s_id = (isset($_GET[s_id]))?$_GET[s_id]:'';
 $get_face = (isset($_GET['face']))?$_GET['face']:'';
 $face_class = (!empty($get_face))?"select_active":'';
 $get_hair = (isset($_GET['hair']))?$_GET['hair']:'';
@@ -214,12 +214,16 @@ $i++;
 }
 foreach ($abroad_array as $val)
 	$abroad_options .= '<option value="'.$val['option'].'" '.(($val['option'] == $get_abroad)?'selected':'').'>'.$val['val'].'</option>';
-
-
 // формируем форму
-
 $result = '<div class="l_block">
 <form action="" method="get" name="model">
+<div class="block_inp">
+	<span>Фильтр по id:</span>
+	<div class="range_inp">
+		<input type="text" name="s_id" style="width:150px;" value="'.$s_id .'" >
+	</div>
+</div>
+
 <select name="services" class="f_select">
 	<option>Вид работы</option>
 	<option value="услуги">наши услуги</option>

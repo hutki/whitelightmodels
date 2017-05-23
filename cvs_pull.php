@@ -17,9 +17,13 @@ function download_send_headers($filename) {
 }
 
 
-//$id = "3','27','29";
-
-
+$pattern = '/^print_[0-9]+$/';
+foreach($_GET as $key => $value)
+{
+if(preg_match($pattern, $key))
+    $result .= $value."',"."'";
+}
+$id = substr($result, 0, -3);
 
 $docs_array = array();
 
@@ -91,17 +95,152 @@ break;
 case 20: // Id tv параметра 'expert' 
 $docs_array[$data['contentid']]['client'] = $data['value'];
 break;
+case 10: // Id tv параметра 'expert' 
+$docs_array[$data['contentid']]['city'] = $data['value'];
+break;
+case 16: // Id tv параметра 'Контактный номер' 
+$docs_array[$data['contentid']]['tel'] = $data['value'];
+break;
+case 17: // Id tv параметра 'email' 
+$docs_array[$data['contentid']]['email'] = $data['value'];
+break;
+case 41: // Id tv параметра 'Instagram' 
+$docs_array[$data['contentid']]['instagram'] = $data['value'];
+break;
+case 42: // Id tv параметра 'vk' 
+$docs_array[$data['contentid']]['vk'] = $data['value'];
+break;
+case 43: // Id tv параметра 'facebook' 
+$docs_array[$data['contentid']]['facebook'] = $data['value'];
+break;
+case 44: // Id tv параметра 'facebook' 
+$docs_array[$data['contentid']]['skype'] = $data['value'];
+break;
 }
 }
 $docs_ids = '';
 foreach ($docs_array as $key =>$value) {
 
- $docs_ids .= $value['name']. ';'.$value['gender'].';'.$value['face'].';'.$value['hair']. ';'.$value['l_hair'].';'.$value['eyes'].';'.$value['age1'].';'.$value['growth1'].';'.$value['chest1']. ';'.$value['waist1'].';'.$value['hip1'].';'.$value['weight1'].  ';'.$value['breast_size'].';'.$value['clothing1'].';'.$value['shoes1'].';'.$value['work'].';'.$value['language'].';'.$value['abroad'].';'.$value['expert'].';'.$value['client'].";\r\n";
+ $docs_ids .=  $key. ';'.$value['name']. ';'.$value['gender'].';'.$value['face'].';'.$value['hair']. ';'.$value['l_hair'].';'.$value['eyes'].';'.$value['age1'].';'.$value['growth1'].';'.$value['chest1']. ';'.$value['waist1'].';'.$value['hip1'].';'.$value['weight1'].  ';'.$value['breast_size'].';'.$value['clothing1'].';'.$value['shoes1'].';'.$value['work'].';'.$value['language'].';'.$value['abroad'].';'.$value['expert'].';'.$value['client'].';'.$value['city'].';'.$value['tel'].';'.$value['email'].';'.$value['instagram'].';'.$value['vk'].';'.$value['facebook'].';'.$value['skype'].";\r\n";
 
 }
 
-$titles = "Имя;Пол;Тип внешности;Цвет волос;Длина волос;Цвет глаз;Возраст;Рост;Грудь;Талия;Бедра;Вес;Размер груди;Размер одежды;Размер обуви;Опыт работы;Языки;Работа за рубежом;Оценка эксперта;Оценка эксперта;\r\n";
+$tv_array = array();
+$sql = "SELECT id,name,elements FROM modx_site_tmplvars";
+$result = $modx->query($sql);
+
+while ($data = $result->fetch(PDO::FETCH_ASSOC))
+{
+switch ($data['id'])
+{
+case 6: // Имя
+$tv_array['name'] = $data['name'];
+break;
+;
+case 34: // Пол
+$tv_array['gender'] = $data['name'];
+break;
+;
+case 1: // Рост
+$tv_array['growth'] = $data['name'];
+break;
+;
+case 2: // Грудь
+$tv_array['chest'] = $data['name'];
+break;
+;
+case 3: // Талия
+$tv_array['waist'] = $data['name'];
+break;
+;
+case 4: // Бедра
+$tv_array['hip'] = $data['name'];
+break;
+;
+case 47: // Вес
+$tv_array['weight'] = $data['name'];
+break;
+;
+case 5: // Размер одежды
+$tv_array['clothing'] = $data['name'];
+break;
+;
+case 11: // Размер груди
+$tv_array['breast_size'] = $data['name'];
+break;
+;
+case 12: // Размер одежды
+$tv_array['shoes'] = $data['name'];
+break;
+;
+case 19: // Рейтинг по оценке эксперта
+$tv_array['expert'] = $data['name'];
+break;
+;
+case 20: // Рейтинг по оценке клиента
+$tv_array['client'] = $data['name'];
+break;
+;
+case 9: // Дата рождения
+$tv_array['age'] = $data['name'];
+break;
+;
+case 13: // Тип внешности
+$tv_array['face'] = $data['name'];
+break;
+;
+case 31: //Цвет волос
+$tv_array['hair'] = $data['name'];
+break;
+case 32: //Цвет волос
+$tv_array['l_hair'] = $data['name'];
+break;
+case 33: //Цвет глаз
+$tv_array['eyes'] = $data['name'];
+break;
+case 11: //Размер груди
+$tv_array['breast_size'] = $data['name'];
+break;
+case 14: //Опыт работы
+$tv_array['work'] = $data['name'];
+break;
+case 15: //Знание языков
+$tv_array['language'] = $data['name'];
+break;
+case 18: //Знание языков
+$tv_array['abroad'] = $data['name'];
+break;
+case 10: //Знание языков
+$tv_array['city'] = $data['name'];
+break;
+case 16: //Контактный номер
+$tv_array['tel'] = $data['name'];
+break;
+case 17: //email
+$tv_array['email'] = $data['name'];
+break;
+case 41: //instagram
+$tv_array['instagram'] = $data['name'];
+break;
+case 42: //vk
+$tv_array['vk'] = $data['name'];
+break;
+case 43: //facebook
+$tv_array['facebook'] = $data['name'];
+break;
+case 44: //skype
+$tv_array['skype'] = $data['name'];
+break;
+}
+}
+
+
+$titles = "id;".$tv_array['name']. ';'.$tv_array['gender'].';'.$tv_array['face'].';'.$tv_array['hair']. ';'.$tv_array['l_hair'].';'.$tv_array['eyes'].';'.$tv_array['age'].';'.$tv_array['growth'].';'.$tv_array['chest']. ';'.$tv_array['waist'].';'.$tv_array['hip'].';'.$tv_array['weight'].  ';'.$tv_array['breast_size'].';'.$tv_array['clothing'].';'.$tv_array['shoes1'].';'.$tv_array['work'].';'.$tv_array['language'].';'.$tv_array['abroad'].';'.$tv_array['expert'].';'.$tv_array['client'].';'.$tv_array['city'].';'.$tv_array['tel'].';'.$tv_array['email'].';'.$tv_array['instagram'].';'.$tv_array['vk'].';'.$tv_array['facebook'].';'.$tv_array['skype'].";\r\n";
 $docs_ids = $titles .$docs_ids ;
+
+
+
+
 
 $docs_ids = str_replace(',', '.', $docs_ids); //запятую меняем на точку, тк , - разделитель в csv 3,5 не катит
 $docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
@@ -115,17 +254,9 @@ $f_hdl = fopen("php://output", 'w');
 // Записываем в файл $text
 fwrite($f_hdl, $docs_ids);
 
-
-
 // Закрывает открытый файл
 fclose($f_hdl);
 
 download_send_headers("data_export.csv");
 echo $text;
 die();
-
-
-//return  $docs_ids;
-/*echo "<pre>";
-var_dump($docs_ids);
-echo "</pre>";*/
