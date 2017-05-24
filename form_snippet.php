@@ -1,6 +1,6 @@
 <?php
 // Начальное значение
-
+$services_options = '';
 $face_options = '';
 $hair_options = '';
 $l_hair_options = '';
@@ -19,9 +19,9 @@ $language_class = '';
 $abroad_class = '';
 // Получаем значения с GET
 $get_gender = (isset($_GET['gender']))?$_GET['gender']:'';
-//$id_gender = ($get_gender == 'Муж' || 'Жен')?'active_gender':'';
-
 $s_id = (isset($_GET[s_id]))?$_GET[s_id]:'';
+$get_services = (isset($_GET['services']))?$_GET['services']:'';
+$services_class = (!empty($get_services))?"select_active":'';
 $get_face = (isset($_GET['face']))?$_GET['face']:'';
 $face_class = (!empty($get_face))?"select_active":'';
 $get_hair = (isset($_GET['hair']))?$_GET['hair']:'';
@@ -161,7 +161,31 @@ $breast_size_array = array( array('option' => '', 'val' => $tv_array['breast_siz
 $abroad_array = array(  array('option' => '', 'val' => 'Готовность работать за границей'),
             array('option' => 'Готова к работе за рубежом', 'val' => 'Готова к работе за рубежом'),
             array('option' => 'Не готова к работе за рубежом', 'val' => 'Не готова к работе за рубежом'));
-// Формируем разметку для селекта face
+// Формируем разметку для селектов
+
+$services = $modx->getCollection('modResource',array('parent'=>4));
+/*$i  = 1;
+foreach($services as $key){
+($i == 1)?$services_options .= '<option value="" '.(('' == $get_services)?'selected':'').'>Вид работы</option>':$services_options .= '<option value="'.$key->get('pagetitle').'" '.(($key->get('pagetitle') == $get_services)?'selected':'').'>'.$key->get('pagetitle').'</option>';
+$i++;
+
+}*/
+$i  = 1;
+foreach($services as $key){
+($i == 1)?$services_options .= '<option value="Вид работы" '.(('' == $get_services)?'selected':'').'>Вид работы</option>':$services_options .= '<option value="'.$key->get('pagetitle').'" '.(($key->get('pagetitle') == $get_services)?'selected':'').'>'.$key->get('pagetitle').'</option>';
+$i++;
+
+}
+
+/*foreach ($tv_array['services'] as $key=> $value)$services_array .= $key."||" .$value;
+	$services_array =  explode(",", str_replace("||", ",", $services_array));
+$i  = 1;
+foreach ($services_array as $val)
+{
+($i == 1)?$services_options .= '<option value="" '.(('' == $get_services)?'selected':'').'>'.$val.'</option>':$services_options .= '<option value="'.$val.'" '.(($val == $get_services)?'selected':'').'>'.$val.'</option>';
+$i++;
+}
+*/
 foreach ($tv_array['face'] as $key=> $value)$face_array .= $key."||" .$value;
 	$face_array =  explode(",", str_replace("||", ",", $face_array));
 $i  = 1;
@@ -224,9 +248,8 @@ $result = '<div class="l_block">
 	</div>
 </div>
 
-<select name="services" class="f_select">
-	<option>Вид работы</option>
-	<option value="услуги">наши услуги</option>
+<select class="f_select '.$services_class.'" name="services">
+	'.$services_options.'
 </select>
 <div class="gender_block">
 <span  class="gender '.(('Муж' == $get_gender)?'active_gender':'').'">
@@ -252,45 +275,45 @@ $result = '<div class="l_block">
 	'.$eyes_options.'
 </select>
 <div class="block_inp">
-	<span>'.$tv_array['age'].':</span>
+	<span style="width:70px;line-height: 0.75;">'.$tv_array['age'].':</span>
 	<div class="range_inp">
-		<input name="age1" type="number" value="'.$get_age1.'" placeholder="от"> - 
-		<input name="age2" type="number" value="'.$get_age2.'" placeholder="до">
+		<input name="age1" type="number" min="1" value="'.$get_age1.'" placeholder="от"> - 
+		<input name="age2" type="number" min="1" value="'.$get_age2.'" placeholder="до">
 	</div>
 </div>
 <div class="block_inp">
 	<span>'.$tv_array['growth'].':</span>
 	<div class="range_inp">
-		<input name="growth1" type="number" value="'.$get_growth1.'" placeholder="от"> - 
-		<input name="growth2" type="number"  value="'.$get_growth2.'"placeholder="до">
+		<input name="growth1" type="number" min="1" value="'.$get_growth1.'" placeholder="от"> - 
+		<input name="growth2" type="number" min="1" value="'.$get_growth2.'"placeholder="до">
 	</div>
 </div>
 <div class="block_inp">
 	<span>'.$tv_array['chest'].':</span>
 	<div class="range_inp">
-		<input name="chest1" type="number" value="'.$get_chest1.'" placeholder="от"> - 
-		<input name="chest2" type="number" value="'.$get_chest2.'" placeholder="до">
+		<input name="chest1" type="number" min="1" value="'.$get_chest1.'" placeholder="от"> - 
+		<input name="chest2" type="number" min="1" value="'.$get_chest2.'" placeholder="до">
 	</div>
 </div>
 <div class="block_inp">
 	<span>'.$tv_array['waist'].':</span>
 	<div class="range_inp">
-		<input name="waist1" type="number"  value="'.$get_waist1.'" placeholder="от"> - 
-		<input name="waist2" type="number" value="'.$get_waist2.'" placeholder="до">
+		<input name="waist1" type="number" min="1" value="'.$get_waist1.'" placeholder="от"> - 
+		<input name="waist2" type="number" min="1" value="'.$get_waist2.'" placeholder="до">
 	</div>
 </div>
 <div class="block_inp">
 	<span>'.$tv_array['hip'].':</span>
 	<div class="range_inp">
-		<input name="hip1" type="number" value="'.$get_hip1.'" placeholder="от"> - 
-		<input name="hip2" type="number" value="'.$get_hip2.'" placeholder="до">
+		<input name="hip1" type="number" min="1" value="'.$get_hip1.'" placeholder="от"> - 
+		<input name="hip2" type="number" min="1" value="'.$get_hip2.'" placeholder="до">
 	</div>
 </div>
 <div class="block_inp">
 	<span>'.$tv_array['weight'].':</span>
 	<div class="range_inp">
-		<input name="weight1" type="number"  value="'.$get_weight1.'" placeholder="от"> - 
-		<input name="weight2" type="number"  value="'.$get_weight2.'" placeholder="до">
+		<input name="weight1" type="number" min="1" value="'.$get_weight1.'" placeholder="от"> - 
+		<input name="weight2" type="number" min="1" value="'.$get_weight2.'" placeholder="до">
 	</div>
 </div>
 <select class="f_select '.$breast_size_class.'" name="breast_size">
@@ -299,15 +322,15 @@ $result = '<div class="l_block">
 <div class="block_inp dress">
 	<span>'.$tv_array['clothing'].':</span>
 	<div class="range_inp">
-		<input name="clothing1" type="number" value="'.$get_clothing1.'" placeholder="от"> - 
-		<input name="clothing2" type="number" value="'.$get_clothing2.'" placeholder="до">
+		<input name="clothing1" type="number" min="1" value="'.$get_clothing1.'" placeholder="от"> - 
+		<input name="clothing2" type="number" min="1" value="'.$get_clothing2.'" placeholder="до">
 	</div>
 </div>
 <div class="block_inp dress">
 	<span>'.$tv_array['shoes'].':</span>
 	<div class="range_inp">
-		<input name="shoes1" type="number"  value="'.$get_shoes1.'" placeholder="от"> - 
-		<input name="shoes2" type="number"  value="'.$get_shoes2.'" placeholder="до">
+		<input name="shoes1" type="number"  min="1" value="'.$get_shoes1.'" placeholder="от"> - 
+		<input name="shoes2" type="number"  min="1" value="'.$get_shoes2.'" placeholder="до">
 	</div>
 </div>
 <select class="f_select '.$work_class.'" name="work">
@@ -326,13 +349,13 @@ $result = '<div class="l_block">
 	<div class="exp_inp">
 		<span>'.$tv_array['expert'].':</span>
 		<div class="range_inp">
-			<input name="expert" type="text"  value="'.$get_expert.'" placeholder="1 - 10">
+			<input name="expert" type="number"  min="1" max="10" value="'.$get_expert.'" placeholder="1 - 10">
 		</div>
 	</div>
 	<div class="exp_inp">
 		<span>'.$tv_array['client'].':</span>
 		<div class="range_inp">
-			<input name="client" type="text" value="'.$get_client.'" placeholder="1 - 10">
+			<input name="client" type="number" min="1" max="10" value="'.$get_client.'" placeholder="1 - 10">
 		</div>
 	</div>
 </div>

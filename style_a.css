@@ -60,10 +60,10 @@ select.f_select{border-top:none;border-left:none;border-right:1px solid #dadada;
 .gender_block label {cursor: pointer;display: block;padding: 10px 31px;}
 .active_gender{background:#fff;border: 1px solid  #ff920c;box-shadow: inset 3px 3px 6px 1px #f0efed;color: #333;font-weight: 600;}
 select.select_active{border: 1px solid rgb(255, 146, 12); box-shadow: rgb(240, 239, 237) 3px 3px 6px 1px inset; color: rgb(51, 51, 51); font-weight: 600; background: rgb(255, 255, 255);}
-.block_inp {padding-left: 5px; font-size: 14px; position: relative;float: left;margin:5px 0;}
+.block_inp {padding-left: 5px; width:241px;font-size: 14px; position: relative;float: left;margin:5px 0;}
 .block_inp span {float:left;margin: 6px 5px 0 0;width: 236px;height:22px;font-weight: 600}
 .range_inp {position: absolute;right: 0;}
-.range_inp input {width: 80px;height: 28px;border-radius: 4px;padding:5px 0 0 10px;border-top:none;border-left:none;border-right:1px solid #dadada;border-bottom:1px solid #dadada;box-shadow: inset 3px 3px 6px 1px #f0efed;}
+.range_inp input {width: 80px;height: 28px;border-radius: 4px;padding:5px 0 0 8px;border-top:none;border-left:none;border-right:1px solid #dadada;border-bottom:1px solid #dadada;box-shadow: inset 3px 3px 6px 1px #f0efed;}
 .range_inp input::-webkit-input-placeholder {color: #929292;font-size: 10px}
 .range_inp input::-moz-placeholder {color: #929292;font-size: 10px}/* Firefox 19+ */
 .range_inp input:-moz-placeholder {color: #929292;font-size: 10px}/* Firefox 18- */
@@ -71,9 +71,9 @@ select.select_active{border: 1px solid rgb(255, 146, 12); box-shadow: rgb(240, 2
 .dress input {width: 50px;}
 .dop_opt {width: 247px;margin-top: 10px; background: #ffebd2;text-align: center;padding: 20px 0 10px 0;overflow: hidden;}
 .clean_inp label{display:inline-block;width: 225px;height: 36px;font-size: 13px;padding-left: 15px;color: #929292;cursor:pointer; margin-bottom:5px;background:#f0efed;border-top:none;border-left:none;border-right:1px solid #dadada;border-bottom:1px solid #dadada;border-radius:6px }
-.exp_inp {text-align: left;font-size: 13px;padding-left: 5px;position: relative;float:left;margin-bottom: 10px }
-.exp_inp span {float:left;margin: 6px 5px 0 0;width: 236px;height:22px;padding-left: 10px;font-weight: 600}
-.exp_inp .range_inp input {width: 50px;right:10px}
+.exp_inp {width:241px;text-align: left;font-size: 13px;position: relative;float:left;margin-bottom: 10px }
+.exp_inp span {float:left;margin: 6px 5px 0 0;width: 190px;height:22px;padding-left: 10px;font-weight: 600}
+.exp_inp .range_inp input {width: 50px;right:10px; top:8px;}
 .butt_block{text-align: center;}
 #reset{display:block;background: none; border:none; color:#ff920c; text-align: center;margin-top: 15px;text-decoration: underline;font-size: 14px}
 .fmod_filt {float:left;margin: 30px 29px 15px; text-align:center;opacity: 0.6; cursor: pointer}

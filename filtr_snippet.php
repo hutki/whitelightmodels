@@ -1,5 +1,6 @@
 <?php
 $s_id = (isset($_GET['s_id']))?$_GET['s_id']:'';
+$services = (isset($_GET['services']))?$_GET['services']:'';
 $gender = (isset($_GET['gender']))?$_GET['gender']:'';
 $face = (isset($_GET['face']))?$_GET['face']:'';
 $hair = (isset($_GET['hair']))?$_GET['hair']:'';
@@ -41,6 +42,18 @@ while ($data = $result->fetch(PDO::FETCH_ASSOC))
 {
 switch ($data['tmplvarid'])
 {
+
+case 35: // Id tv параметра 'Фио'
+$docs_array[$data['contentid']]['fio'] = $data['value'];
+break;
+case 6: // Id tv параметра 'Псевдоним'
+$docs_array[$data['contentid']]['name'] = $data['value'];
+break;
+
+case 24: // Id tv параметра 'услуги'
+$docs_array[$data['contentid']]['services'] = $data['value'];
+break;
+
 case 34: // Id tv параметра 'Пол'
 $docs_array[$data['contentid']]['gender'] = $data['value'];
 break;
@@ -109,8 +122,11 @@ break;
  foreach ($docs_array as $key => $val)
  {
  if (
+  ($data['contentid'] ==$s_id || $val['name'] == $s_id || $val['fio'] == $s_id) &&
+  //услуги
+   ((preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services'])) == $services) &&
   //пол
-  ($val['gender'] == $gender || !isset($val['gender'])) &&
+  ($val['gender'] == $gender || !isset($val['gender']) || empty($gender) || !isset($gender)) &&
   //тип лица
   ($val['face'] == $face || !isset($val['face']) || empty($face) || !isset($face)) &&
   //цвет волос
