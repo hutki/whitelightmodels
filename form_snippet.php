@@ -242,10 +242,11 @@ foreach ($abroad_array as $val)
 $result = '<div class="l_block">
 <form action="" method="get" name="model">
 <div class="block_inp">
-	<span>Фильтр по id:</span>
-	<div class="range_inp">
-		<input type="text" name="s_id" style="width:150px;" value="'.$s_id .'" >
+	<div class="range_inp search" style="left: 270px;top: -50px;width: 869px;background: #dadada;height: 40px;">
+		<input type="text" name="s_id" style="width: 710px;padding: 10px;margin: 7px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, или ID анкеты">
+		<button id="search" type="submit">&#171;  Найти</button>
 	</div>
+
 </div>
 
 <select class="f_select '.$services_class.'" name="services">
