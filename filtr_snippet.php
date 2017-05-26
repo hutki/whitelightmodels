@@ -42,18 +42,15 @@ while ($data = $result->fetch(PDO::FETCH_ASSOC))
 {
 switch ($data['tmplvarid'])
 {
-
 case 35: // Id tv параметра 'Фио'
 $docs_array[$data['contentid']]['fio'] = $data['value'];
 break;
 case 6: // Id tv параметра 'Псевдоним'
 $docs_array[$data['contentid']]['name'] = $data['value'];
 break;
-
 case 24: // Id tv параметра 'услуги'
 $docs_array[$data['contentid']]['services'] = $data['value'];
 break;
-
 case 34: // Id tv параметра 'Пол'
 $docs_array[$data['contentid']]['gender'] = $data['value'];
 break;
@@ -122,15 +119,17 @@ break;
  foreach ($docs_array as $key => $val)
  {
  if (
-  ($data['contentid'] ==$s_id || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio'])) ) &&
+  ((preg_match('/^(.)*'.$s_id.'(.)*$/uis', $key)) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio']))) &&
   //услуги
-   ((preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services']))) &&
+
+(((empty($services) && isset($_GET['sub'])) || (!empty($services) &&(preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services']))))) &&
+   //((!empty($services) && (preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services'])))) &&
   //пол
   ($val['gender'] == $gender || !isset($val['gender']) || empty($gender) || !isset($gender)) &&
   //тип лица
   ($val['face'] == $face || !isset($val['face']) || empty($face) || !isset($face)) &&
   //цвет волос
-  ($val['hair'] == $hair || !isset($val['hair']) || empty($hair) || !isset($hair)) &&
+ ($val['hair'] == $hair || !isset($val['hair']) || empty($hair) || !isset($hair)) &&
   //длина волос
   ($val['l_hair'] == $l_hair || !isset($val['l_hair']) || empty($l_hair) || !isset($l_hair)) &&
   //цвет глаз
@@ -186,18 +185,18 @@ break;
   //эксперт
     ($val['expert'] == $expert || !isset($val['expert']) || empty($expert) || !isset($expert)) &&
   //клиент
-     ($val['client'] == $client || !isset($val['client']) || empty($client) || !isset($client)) &&
+    ($val['client'] == $client || !isset($val['client']) || empty($client) || !isset($client)) &&
   //анкеты с пустыми полями
-     (!isset($val['language']) == $clean_p || empty($clean_p) || !isset($clean_p))
+    (!isset($val['language']) == $clean_p || empty($clean_p) || !isset($clean_p))
     ) // Если соответствует двум параметрам сразу
 
          $docs_ids .=  $key.',';
  }
  //Выводим только по id
- if (!empty($s_id)){
+ /*if (!empty($s_id)){
    $docs_ids .= $s_id.',';
  }
-
+*/
  
  // Удаляем в конце запятую
  $docs_ids = substr($docs_ids, 0, -1);

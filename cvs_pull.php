@@ -86,8 +86,11 @@ break;
 case 18: // Id tv параметра 'abroad' 
 $docs_array[$data['contentid']]['abroad'] = $data['value'];
 break;
-case 15: // Id tv параметра 'language' !!!!!!!!!!!!!!!!!!!!!не workет
+case 15: // Id tv параметра 'language' 
 $docs_array[$data['contentid']]['language'] = $data['value'];
+break;
+case 24: // Id tv параметра 'language' 
+$docs_array[$data['contentid']]['tags'] = $data['value'];
 break;
 case 19: // Id tv параметра 'expert' 
 $docs_array[$data['contentid']]['expert'] = $data['value'];
@@ -95,7 +98,7 @@ break;
 case 20: // Id tv параметра 'expert' 
 $docs_array[$data['contentid']]['client'] = $data['value'];
 break;
-case 10: // Id tv параметра 'expert' 
+case 10: // Id tv параметра 'city' 
 $docs_array[$data['contentid']]['city'] = $data['value'];
 break;
 case 16: // Id tv параметра 'Контактный номер' 
@@ -103,6 +106,9 @@ $docs_array[$data['contentid']]['tel'] = $data['value'];
 break;
 case 17: // Id tv параметра 'email' 
 $docs_array[$data['contentid']]['email'] = $data['value'];
+break;
+case 35: // Id tv Фио 
+$docs_array[$data['contentid']]['fio'] = $data['value'];
 break;
 case 41: // Id tv параметра 'Instagram' 
 $docs_array[$data['contentid']]['instagram'] = $data['value'];
@@ -113,7 +119,7 @@ break;
 case 43: // Id tv параметра 'facebook' 
 $docs_array[$data['contentid']]['facebook'] = $data['value'];
 break;
-case 44: // Id tv параметра 'facebook' 
+case 44: // Id tv параметра 'skype' 
 $docs_array[$data['contentid']]['skype'] = $data['value'];
 break;
 }
@@ -121,7 +127,7 @@ break;
 $docs_ids = '';
 foreach ($docs_array as $key =>$value) {
 
- $docs_ids .=  $key. ';'.$value['name']. ';'.$value['gender'].';'.$value['face'].';'.$value['hair']. ';'.$value['l_hair'].';'.$value['eyes'].';'.$value['age1'].';'.$value['growth1'].';'.$value['chest1']. ';'.$value['waist1'].';'.$value['hip1'].';'.$value['weight1'].  ';'.$value['breast_size'].';'.$value['clothing1'].';'.$value['shoes1'].';'.$value['work'].';'.$value['language'].';'.$value['abroad'].';'.$value['expert'].';'.$value['client'].';'.$value['city'].';'.$value['tel'].';'.$value['email'].';'.$value['instagram'].';'.$value['vk'].';'.$value['facebook'].';'.$value['skype'].";\r\n";
+ $docs_ids .=  $key. ';'.$value['name'].';'.$value['gender'].';'.$value['face'].';'.$value['hair']. ';'.$value['l_hair'].';'.$value['eyes'].';'.$value['age1'].';'.$value['growth1'].';'.$value['chest1']. ';'.$value['waist1'].';'.$value['hip1'].';'.$value['weight1'].  ';'.$value['breast_size'].';'.$value['clothing1'].';'.$value['shoes1'].';'.$value['work'].';'.$value['language'].';'.$value['abroad'].';'.$value['tags'].';'.$value['expert'].';'.$value['client'].';'.$value['city'].';'.$value['tel'].';'.$value['email'].';'.$value['fio'].';'.$value['instagram'].';'.$value['vk'].';'.$value['facebook'].';'.$value['skype'].";\r\n";
 
 }
 
@@ -210,6 +216,9 @@ break;
 case 18: //Знание языков
 $tv_array['abroad'] = $data['name'];
 break;
+case 24: //Тэги
+$tv_array['tags'] = $data['name'];
+break;
 case 10: //Знание языков
 $tv_array['city'] = $data['name'];
 break;
@@ -218,6 +227,9 @@ $tv_array['tel'] = $data['name'];
 break;
 case 17: //email
 $tv_array['email'] = $data['name'];
+break;
+case 35: //email
+$tv_array['fio'] = $data['name'];
 break;
 case 41: //instagram
 $tv_array['instagram'] = $data['name'];
@@ -235,14 +247,14 @@ break;
 }
 
 
-$titles = "id;".$tv_array['name']. ';'.$tv_array['gender'].';'.$tv_array['face'].';'.$tv_array['hair']. ';'.$tv_array['l_hair'].';'.$tv_array['eyes'].';'.$tv_array['age'].';'.$tv_array['growth'].';'.$tv_array['chest']. ';'.$tv_array['waist'].';'.$tv_array['hip'].';'.$tv_array['weight'].  ';'.$tv_array['breast_size'].';'.$tv_array['clothing'].';'.$tv_array['shoes1'].';'.$tv_array['work'].';'.$tv_array['language'].';'.$tv_array['abroad'].';'.$tv_array['expert'].';'.$tv_array['client'].';'.$tv_array['city'].';'.$tv_array['tel'].';'.$tv_array['email'].';'.$tv_array['instagram'].';'.$tv_array['vk'].';'.$tv_array['facebook'].';'.$tv_array['skype'].";\r\n";
+$titles = "id;".$tv_array['name']. ';'.$tv_array['gender'].';'.$tv_array['face'].';'.$tv_array['hair']. ';'.$tv_array['l_hair'].';'.$tv_array['eyes'].';'.$tv_array['age'].';'.$tv_array['growth'].';'.$tv_array['chest']. ';'.$tv_array['waist'].';'.$tv_array['hip'].';'.$tv_array['weight'].  ';'.$tv_array['breast_size'].';'.$tv_array['clothing'].';'.$tv_array['shoes1'].';'.$tv_array['work'].';'.$tv_array['language'].';'.$tv_array['abroad'].';'.$tv_array['tags'].';'.$tv_array['expert'].';'.$tv_array['client'].';'.$tv_array['city'].';'.$tv_array['tel'].';'.$tv_array['email'].';'.$tv_array['fio'].';'.$tv_array['instagram'].';'.$tv_array['vk'].';'.$tv_array['facebook'].';'.$tv_array['skype'].";\r\n";
 $docs_ids = $titles .$docs_ids ;
 
 
 
 
 
-$docs_ids = str_replace(',', '.', $docs_ids); //запятую меняем на точку, тк , - разделитель в csv 3,5 не катит
+//$docs_ids = str_replace(',', '.', $docs_ids); //запятую меняем на точку, тк , - разделитель в csv 3,5 не катит
 $docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
 
 $filename = 'data_export.csv';

@@ -243,8 +243,8 @@ $result = '<div class="l_block">
 <form action="" method="get" name="model">
 <div class="block_inp">
 	<div class="range_inp search" style="left: 270px;top: -50px;width: 869px;background: #dadada;height: 40px;">
-		<input type="text" name="s_id" style="width: 710px;padding-top: 10px;margin: 7px;font-size:17px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, или ID анкеты">
-		<button id="search" type="submit">&#171;  Найти</button>
+		<input type="text" name="s_id" style="width: 710px;padding: 10px;margin: 7px;font-size:17px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, или ID анкеты">
+		<button id="search" type="submit" name="sub">&#171;  Найти</button>
 	</div>
 
 </div>
@@ -361,7 +361,7 @@ $result = '<div class="l_block">
 	</div>
 </div>
 <div class="butt_block">
-	<button id="pokazat" type="submit">Показать</button>
+	<button id="pokazat" type="submit" name="sub">Показать</button>
 	<a href="[[~30]]" id="reset">Очистить все поля</a>
 </div>
 </form>

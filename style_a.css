@@ -142,7 +142,7 @@ select.select_active{border: 1px solid rgb(255, 146, 12); box-shadow: rgb(240, 2
 	margin-right: 40px;
 }
 .wrap_2 h2, .wrap_3 h2{
-	font-size: 25px;
+	font-size: 30px;
 	text-decoration: underline;
 	margin:15px 0 20px 0;
 }
@@ -213,7 +213,7 @@ font-size: 18px;
     width: 100px;
 }
 .block_5 {
-	width: 80%;
+	width: 90%;
 }
 
 .block_6 p{
