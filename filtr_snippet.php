@@ -122,9 +122,9 @@ break;
  foreach ($docs_array as $key => $val)
  {
  if (
-  ($data['contentid'] ==$s_id || $val['name'] == $s_id || $val['fio'] == $s_id) &&
+  ($data['contentid'] ==$s_id || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio'])) ) &&
   //услуги
-   ((preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services'])) == $services) &&
+   ((preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services']))) &&
   //пол
   ($val['gender'] == $gender || !isset($val['gender']) || empty($gender) || !isset($gender)) &&
   //тип лица

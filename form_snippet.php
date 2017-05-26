@@ -172,7 +172,7 @@ $i++;
 }*/
 $i  = 1;
 foreach($services as $key){
-($i == 1)?$services_options .= '<option value="Вид работы" '.(('' == $get_services)?'selected':'').'>Вид работы</option>':$services_options .= '<option value="'.$key->get('pagetitle').'" '.(($key->get('pagetitle') == $get_services)?'selected':'').'>'.$key->get('pagetitle').'</option>';
+($i == 1)?$services_options .= '<option value="" '.(('' == $get_services)?'selected':'').'>Вид работы</option>':$services_options .= '<option value="'.$key->get('pagetitle').'" '.(($key->get('pagetitle') == $get_services)?'selected':'').'>'.$key->get('pagetitle').'</option>';
 $i++;
 
 }
@@ -243,7 +243,7 @@ $result = '<div class="l_block">
 <form action="" method="get" name="model">
 <div class="block_inp">
 	<div class="range_inp search" style="left: 270px;top: -50px;width: 869px;background: #dadada;height: 40px;">
-		<input type="text" name="s_id" style="width: 710px;padding: 10px;margin: 7px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, или ID анкеты">
+		<input type="text" name="s_id" style="width: 710px;padding-top: 10px;margin: 7px;font-size:17px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, или ID анкеты">
 		<button id="search" type="submit">&#171;  Найти</button>
 	</div>
 

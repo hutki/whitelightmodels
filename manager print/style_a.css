@@ -130,11 +130,16 @@ select.select_active{border: 1px solid rgb(255, 146, 12); box-shadow: rgb(240, 2
 }
 .block5 {
 	   border-top: 2px solid #f84c40;
-    margin-top: 10px;
-    padding-top: 15px;
+    margin-top: 5px;
+    padding-top: 10px;
     border-bottom: 2px solid #f84c40;
     overflow: hidden;
 }
+.gallery_p_cl {width: 427px; overflow: hidden;}
+.gallery_p_cl img {float: left}
+.gallery_p_cl img:nth-child(1){margin-right: 17px}
+.gallery_p_cl img:nth-child(2){margin-bottom: 30px}
+.gallery_p_cl img:nth-child(1n+2){width: 130px}
 .wrap_1 {
 	float: left;
 	width: 25%;
@@ -168,7 +173,7 @@ margin-right: 40px;
 }
 .block_1 p{
 position: relative;
-margin: 5px 0;
+margin: 0;
 font-size: 18px;
 }
 .block_1 span{
@@ -183,7 +188,7 @@ font-size: 18px;
 }
 .block_2 p{
 position: relative;
-margin: 5px 0;
+margin: 0;
 font-size: 18px;
 }
 .block_2 span{
@@ -198,7 +203,7 @@ font-size: 18px;
 }
 .block_3 p{
 position: relative;
-margin: 5px 0;
+margin: 0;
 font-size: 18px;
 }
 .block_3 span{
@@ -214,7 +219,7 @@ font-size: 18px;
 }
 .block_4 p{
 position: relative;
-margin: 5px 0;
+margin: 0;
 font-size: 18px;
 }
 .block_4 span{
@@ -228,7 +233,7 @@ font-size: 18px;
 }
 
 .block_6 p{
-	margin: 5px 0;
+	margin: 0;
     font-size: 18px;
 }
 
@@ -240,8 +245,25 @@ font-size: 18px;
     margin: 30px 0;
     padding: 0; 
 }
-.botbor{
-
+/*
+Блок клиента
+*/
+.wd96 {
+	padding:0 0 50px 30px;
+}
+.cl{
+	width: 45%;
+	margin-right: 0;
+}
+.cl_b1{
+	width: 25%;
+    margin-right: 90px;
+}
+.cl_b2{
+	width: 40%;
+}
+.cl_b3{
+	width: 87%;
 }
 
 @media print {

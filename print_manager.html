@@ -1,111 +1,83 @@
-<div class="block1 wd114 print" id="block1">
-    <header>
-            <div class="logo77">
-                <img src="/images/logoblack.png" style="width:78px">
-            </div>
-            <div class="lhead" style="color:#000;">
-                <div class="lname">
-                <span>Модельное агентство</span>White Light Models</div>
-                <!--<div class="ldesc">Высокая красота</div>-->
-            </div>
-            <div class="tel_print">
-                <p style="color:#f84c40;">АНКЕТА ДЛЯ ВНУТРЕННЕГО ПОЛЬЗОВАНИЯ</p>
-            </div>
-            <div class="clear"></div>
+    <div class="block1 wd114 print" id="block1">
+        <header>
+                <div class="logo77">
+                    <img src="/images/logoblack.png" style="width:78px">
+                </div>
+                <div class="lhead" style="color:#000;">
+                    <div class="lname">
+                    <span>Модельное агентство</span>White Light Models</div>
+                    <!--<div class="ldesc">Высокая красота</div>-->
+                </div>
+                <div class="service_print">
+                    <p>Анкета для внутреннего пользования</p>
+                </div>
+                 <div class="id_p">ID: [[+id]]</div>
+                <div class="clear"></div>
 
-    </header>
-</div>
-
-<div class="block5 wd96 break">
-    <div>
-        <div style="float:right;color:#f84c40;font-size: 51px;position:relative;bottom: 50px;">ID:[[+id]]</div>
-        <div style="border-bottom: 1px solid;top: 22px; position: relative;"></div>
+        </header>
     </div>
-    [[+tv.images-model]]
-    <div style="border-bottom: 1px solid; min-height:980px;margin-bottom: 50px">
-        <div style="padding:60px 0 0 20px;">
-            <div style="float:left;">
-            <!-- -->
-                <div class="container">
-                    <div style="font-size:40px;margin:10px 0 30px;">[[+tv.Имя]]</div>
-                    <div class="gallery_p">
-                     [[!Gallery? &album=`[[+tv.GalleryAlbum]]` &limit=`1` &thumbWidth=`280` &thumbHeight=`425` ]]
 
+    <div class="block5 break">
+       
+            <div class="main">
+                    <div class="container wrap_1">
+                        <h1>[[+tv.Имя]]</h1>
+                        <div class="gallery_p">
+                           [[!Gallery? &album=`[[+tv.GalleryAlbum]]` &limit=`1` &thumbWidth=`280` &thumbHeight=`425` ]]
+                        </div>
                     </div>
-                </div>
+                    <div class="wrap_2" style="background: url(images/logofon.png) no-repeat; background-position: right center;
+">
+                    <h2>Параметры:</h2>
+                        <div class="content_p block_1">
+                            <p>Рост: <span>[[+tv.Рост]]</span></p>      
+                            <p>Грудь: <span>[[+tv.Грудь]]</span></p>        
+                            <p>Талия: <span>[[+tv.Талия]]</span></p>         
+                            <p>Бедра: <span>[[+tv.Бедра]]</span></p>
+                        </div>
+                        <div class="content_p block_2"> 
+                             <p>р-р одежды: <span>[[+tv.Р-р одежды]]</span></p>
+                             <p>р-р груди: <span>[[+tv.Р-р груди]]</span></p>
+                             <p>р-р обуви: <span>[[+tv.Р-р обуви]]</span></p>
+                        </div>
+                         <div class="clear"></div>
+                        <div class="content_p block_3">
+                            <p>Цвет волос: <span>[[+tv.Цвет волос]]</span></p>
+                            <p>Длина волос: <span>[[+tv.Длина волос]]</span></p>
+                        </div>
+                        <div class="content_p block_3">
+                            <p>Цвет глаз: <span>[[+tv.Цвет глаз]]</span></p>
+                            <p>Пол: <span>[[+tv.Пол]]</span></p>
+                            <p>Тип внешности: <span>[[+tv.Тип внешности]]</span></p>
+                            <p>Опыт работы: <span>[[+tv.Опыт работы]]</span></p>
+                        </div>
 
-                <div style="clear: both;"></div>
+                        <div class="content_p block_4">
+                            <p>Знания языков: <span>[[+tv.Знание языков]]</span></p>
+                         </div>
+                        <div class="content_p block_5">
+                            <h2>Работает в категориях:</h2>
+                            <p>[[+tv.тэги]]</p>
+                        </div>
+                    </div>
+                    <div class="wrap_3">
+                        <h2 style="color:#f84c40">Служебная информация</h2>
+                        <div class="content_p block_6">
+                            <p style="margin-bottom: 30px;">Фио: <span>[[+tv.Фио]]</span></p>
+                            <p>Место проживания: <span>[[+tv.Место проживания]]</span></p>
+                            <p>Контактный номер телефона: <span>[[+tv.Контактный номер телефона]]</span></p>
+                            <p style="margin: 40px 0;">e-mail:<span>[[+tv.e-mail]]</span></span>
+                            <p>Instagram: <span>[[+tv.Instagram]]</span></p>
+                            <p>VK: <span>[[+tv.VK]]</span></p>
+                            <p>Facebook: <span>[[+tv.Facebook]]</span></p>
+                            <p>Skype: <span>[[+tv.Skype]]</span></p>
+                            <h3 style="margin-top: 20px;">Дополнительно</h3>
+                            <hr>
+                            <hr>
+                            <hr>
+                            <hr>
+                        </div>
+                    </div>
             </div>
- <!-- -->
-
-            <div style="float:left;text-align: left;width: 50%;padding-left:50px; background: url(images/logofon.png) no-repeat; background-position: right center;">
-                <div class="content_p block_1">
-                    <h3>Параметры:</h3>
-
-                    <span>Рост: </span><span>[[+tv.Рост]]</span>        
-                    <br>
-                    <span>Грудь: </span><span>[[+tv.Грудь]]</span>        
-                    <br>
-                    <span>Талия: </span><span>[[+tv.Талия]]</span>         
-                    <br>
-                    <span> Бедра: </span><span>[[+tv.Бедра]]</span>
-                </div>
-                <div  class="content_p block_2" style="width: 50%;padding-top: 43px;"> 
-                   <br>
-                     <span>р-р одежды: </span><span>[[+tv.Р-р одежды]]</span>
-                    <br>
-                     <span>р-р груди: </span><span>[[+tv.Р-р груди]]</span>
-                    <br>
-                     <span>р-р обуви: </span><span>[[+tv.Р-р обуви]]</span>
-                    <br>
-                     <span>Вес: </span><span>[[+tv.Вес]]</span>
-                </div>
-                <div style="clear: both;"></div>
-                <div  class="content_p block_3" style="float:none;width: 100%;">
-                    <br>
-                    <span>Цвет волос: </span><span>[[+tv.Цвет волос]]</span>
-                    <br>
-                    <span>Длина волос: </span><span>[[+tv.Длина волос]]</span>
-                    <br>
-                    <span>Цвет глаз: </span><span>[[+tv.Цвет глаз]]</span>
-                    <br>
-                    <span>Пол: </span><span>[[+tv.Пол]]</span>
-                </div>
-                <div class="content_p block_4" style="float:none;width: 100%;">
-                    <br>
-                     <span>Тип внешности: </span><span>[[+tv.Тип внешности]]</span>
-                    <br>
-                    <span>Опыт работы: </span><span>[[+tv.Опыт работы]]</span>
-                    <br><br>
-                    <span>Знания языков: </span> <span>[[+tv.Знание языков]]</span>
-                    <br>
-                    <span[[+tv.Готовность к работе заграницей]]</span>
-                </div>
-                <br>
-                <div class="content_p block_4" style=" width: 55%;"><h3 style="font-size:30px; margin:10px 0 23px 0;width: 319px;border-bottom: 1px solid;">Работает в категориях:</h3>[[+tv.тэги]]
-                </div>
-            </div>
-           </div>
- <div style="clear: both;"></div>
-             <div class="content_p block_5">
-               <h3 style="font-size:30px;width: 340px;border-bottom: 1px solid;margin:0;">Служебная информация</h3>
-                 <br>
-                 <span>Место проживания: </span><span>[[+tv.Место проживания]]</span>
-                <br>
-                <span>Контактный номер телефона: </span><span>[[+tv.Контактный номер телефона]]</span>
-                <br>
-                <span>e-mail: </span><span>[[+tv.e-mail]]</span>
-                <br>
-                <span>Фио: </span><span>[[+tv.Фио]]</span>
-                <br>
-                <span>Instagram: </span><span>[[+tv.Instagram]]</span>
-                <br>
-                <span>VK: </span><span>[[+tv.VK]]</span>
-                <br>
-                <span>Facebook: </span><span>[[+tv.Facebook]]</span>
-                <br>
-                <span>Skype: </span><span>[[+tv.Skype]]</span>
-            </div>
-             </div>
     </div>
-
+    <div class="clear"></div>
