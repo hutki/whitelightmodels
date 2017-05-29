@@ -16,7 +16,6 @@ function download_send_headers($filename) {
     header("Content-Transfer-Encoding: binary");
 }
 
-
 $pattern = '/^print_[0-9]+$/';
 foreach($_GET as $key => $value)
 {
@@ -245,17 +244,19 @@ $tv_array['skype'] = $data['name'];
 break;
 }
 }
-
-
 $titles = "id;".$tv_array['name']. ';'.$tv_array['gender'].';'.$tv_array['face'].';'.$tv_array['hair']. ';'.$tv_array['l_hair'].';'.$tv_array['eyes'].';'.$tv_array['age'].';'.$tv_array['growth'].';'.$tv_array['chest']. ';'.$tv_array['waist'].';'.$tv_array['hip'].';'.$tv_array['weight'].  ';'.$tv_array['breast_size'].';'.$tv_array['clothing'].';'.$tv_array['shoes1'].';'.$tv_array['work'].';'.$tv_array['language'].';'.$tv_array['abroad'].';'.$tv_array['tags'].';'.$tv_array['expert'].';'.$tv_array['client'].';'.$tv_array['city'].';'.$tv_array['tel'].';'.$tv_array['email'].';'.$tv_array['fio'].';'.$tv_array['instagram'].';'.$tv_array['vk'].';'.$tv_array['facebook'].';'.$tv_array['skype'].";\r\n";
 $docs_ids = $titles .$docs_ids ;
 
-
-
-
+//подготавливаем вывод для винды
+$win = "Windows";
+if (preg_match("/$win/i", $_SERVER['HTTP_USER_AGENT'])){
+                preg_replace( "/\./i",",",$string,1)
+    $docs_ids = preg_replace("/\./i",",", $docs_ids,1); //точку меняем на запятую, тк 3.5  в exel не катит
+    $docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
+}
 
 //$docs_ids = str_replace(',', '.', $docs_ids); //запятую меняем на точку, тк , - разделитель в csv 3,5 не катит
-$docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
+//$docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
 
 $filename = 'data_export.csv';
 

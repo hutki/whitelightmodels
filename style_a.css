@@ -65,7 +65,7 @@ select.select_active{border: 1px solid rgb(255, 146, 12); box-shadow: rgb(240, 2
 .range_inp {position: absolute;right: 0;}
 .range_inp .search {left: 270px;top: -26px;width: 869px;background: #dadada;height: 40px;}
 .range_inp .search input {width: 730px;padding: 10px;margin: 7px;}
-#search {width: 120px;height: 27px;background: #a7a7a7;border: none;color: #fff;border-radius: 5px;}
+#search {width: 120px;height: 27px;background: #a7a7a7;border: none;color: #fff;border-radius: 5px;cursor: pointer;}
 .range_inp input {width: 75px;height: 28px;border-radius: 4px;padding:5px 0 0 8px;border-top:none;border-left:none;border-right:1px solid #dadada;border-bottom:1px solid #dadada;box-shadow: inset 3px 3px 6px 1px #f0efed;}
 .range_inp input::-webkit-input-placeholder {color: #929292;font-size: 10px}
 .range_inp input::-moz-placeholder {color: #929292;font-size: 10px}/* Firefox 19+ */

@@ -119,7 +119,7 @@ break;
  foreach ($docs_array as $key => $val)
  {
  if (
-  ((preg_match('/^(.)*'.$s_id.'(.)*$/uis', $key)) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio']))) &&
+  ((preg_match('/^(.)*'.$key.'(.)*$/Uuis',$s_id)) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio']))) &&
   //услуги
 
 (((empty($services) && isset($_GET['sub'])) || (!empty($services) &&(preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services']))))) &&
@@ -191,6 +191,7 @@ break;
     ) // Если соответствует двум параметрам сразу
 
          $docs_ids .=  $key.',';
+
  }
  //Выводим только по id
  /*if (!empty($s_id)){
