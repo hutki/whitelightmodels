@@ -181,13 +181,13 @@ break;
    //гастробайтер
    ($val['abroad'] == $abroad || !isset($val['abroad']) || empty($abroad) || !isset($abroad)) &&
    //языки
-    ((preg_match('/^(.)*'.$language.'(.)*$/uis', $val['language']))  || empty($language) || !isset($language)) &&
+    ((preg_match('/^(.)*'.$language.'(.)*$/uis', $val['language'])) || empty($language) || !isset($language)) &&
   //эксперт
     ($val['expert'] == $expert || !isset($val['expert']) || empty($expert) || !isset($expert)) &&
   //клиент
     ($val['client'] == $client || !isset($val['client']) || empty($client) || !isset($client)) &&
   //анкеты с пустыми полями
-    (!isset($val['language']) == $clean_p || empty($clean_p) || !isset($clean_p))
+    ((!isset($val['language']) || !isset($val['chest1']) || !isset($val['gender']) || !isset($val['face']) || !isset($val['hair']) || !isset($val['l_hair']) || !isset($val['eyes']) || !isset($val['age1']) || !isset($val['growth1']) || !isset($val['waist1']) || !isset($val['hip1']) || !isset($val['weight1']) || !isset($val['breast_size']) || !isset($val['clothing1']) || !isset($val['shoes1']) || !isset($val['work']) || !isset($val['abroad']) || !isset($val['expert']) || !isset($val['client'])) == $clean_p || empty($clean_p) || !isset($clean_p))
     ) // Если соответствует двум параметрам сразу
 
          $docs_ids .=  $key.',';
