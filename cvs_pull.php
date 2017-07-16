@@ -26,7 +26,7 @@ $id = substr($result, 0, -3);
 
 $docs_array = array();
 
-$sql = "SELECT tmplvarid,contentid,value FROM modx_site_tmplvar_contentvalues  WHERE contentid IN ('$id') ORDER BY tmplvarid ASC ";
+$sql = "SELECT tmplvarid,contentid,value FROM modx_site_tmplvar_contentvalues  WHERE contentid IN ('$id') ORDER BY tmplvarid ASC";
 $result = $modx->query($sql);
 
 // Подготавливаем данные
@@ -34,7 +34,7 @@ while ($data = $result->fetch(PDO::FETCH_ASSOC))
 {
 switch ($data['tmplvarid'])
 {
-case 6: // //Имя
+case 6: //Имя
 $docs_array[$data['contentid']]['name'] = $data['value'];
 break;  
 case 34: // Id tv параметра 'Пол'
@@ -126,8 +126,7 @@ break;
 $docs_ids = '';
 foreach ($docs_array as $key =>$value) {
 
- $docs_ids .=  $key. ';'.$value['name'].';'.$value['gender'].';'.$value['face'].';'.$value['hair']. ';'.$value['l_hair'].';'.$value['eyes'].';'.$value['age1'].';'.$value['growth1'].';'.$value['chest1']. ';'.$value['waist1'].';'.$value['hip1'].';'.$value['weight1'].  ';'.$value['breast_size'].';'.$value['clothing1'].';'.$value['shoes1'].';'.$value['work'].';'.$value['language'].';'.$value['abroad'].';'.$value['tags'].';'.$value['expert'].';'.$value['client'].';'.$value['city'].';'.$value['tel'].';'.$value['email'].';'.$value['fio'].';'.$value['instagram'].';'.$value['vk'].';'.$value['facebook'].';'.$value['skype'].";\r\n";
-
+$docs_ids .=  $key.';'.$value['name'].';'.$value['gender'].';'.$value['face'].';'.$value['hair'].';'.$value['l_hair'].';'.$value['eyes'].';'.$value['age1'].';'.$value['growth1'].';'.$value['chest1'].';'.$value['waist1'].';'.$value['hip1'].';'.$value['weight1'].';'.$value['breast_size'].';'.$value['clothing1'].';'.$value['shoes1'].';'.$value['work'].';'.$value['language'].';'.$value['abroad'].';'.$value['tags'].';'.$value['expert'].';'.$value['client'].';'.$value['city'].';'.$value['tel'].';'.$value['email'].';'.$value['fio'].';'.$value['instagram'].';'.$value['vk'].';'.$value['facebook'].';'.$value['skype'].";\r\n";
 }
 
 $tv_array = array();
@@ -244,23 +243,17 @@ $tv_array['skype'] = $data['name'];
 break;
 }
 }
-$titles = "id;".$tv_array['name']. ';'.$tv_array['gender'].';'.$tv_array['face'].';'.$tv_array['hair']. ';'.$tv_array['l_hair'].';'.$tv_array['eyes'].';'.$tv_array['age'].';'.$tv_array['growth'].';'.$tv_array['chest']. ';'.$tv_array['waist'].';'.$tv_array['hip'].';'.$tv_array['weight'].  ';'.$tv_array['breast_size'].';'.$tv_array['clothing'].';'.$tv_array['shoes1'].';'.$tv_array['work'].';'.$tv_array['language'].';'.$tv_array['abroad'].';'.$tv_array['tags'].';'.$tv_array['expert'].';'.$tv_array['client'].';'.$tv_array['city'].';'.$tv_array['tel'].';'.$tv_array['email'].';'.$tv_array['fio'].';'.$tv_array['instagram'].';'.$tv_array['vk'].';'.$tv_array['facebook'].';'.$tv_array['skype'].";\r\n";
+$titles = "id;".$tv_array['name'].';'.$tv_array['gender'].';'.$tv_array['face'].';'.$tv_array['hair'].';'.$tv_array['l_hair'].';'.$tv_array['eyes'].';'.$tv_array['age'].';'.$tv_array['growth'].';'.$tv_array['chest'].';'.$tv_array['waist'].';'.$tv_array['hip'].';'.$tv_array['weight'].';'.$tv_array['breast_size'].';'.$tv_array['clothing'].';'.$tv_array['shoes1'].';'.$tv_array['work'].';'.$tv_array['language'].';'.$tv_array['abroad'].';'.$tv_array['tags'].';'.$tv_array['expert'].';'.$tv_array['client'].';'.$tv_array['city'].';'.$tv_array['tel'].';'.$tv_array['email'].';'.$tv_array['fio'].';'.$tv_array['instagram'].';'.$tv_array['vk'].';'.$tv_array['facebook'].';'.$tv_array['skype'].";\r\n";
 $docs_ids = $titles .$docs_ids ;
 
 //подготавливаем вывод для винды
 $win = "Windows";
 if (preg_match("/$win/i", $_SERVER['HTTP_USER_AGENT'])){
-                preg_replace( "/\./i",",",$string,1)
     $docs_ids = preg_replace("/\./i",",", $docs_ids,1); //точку меняем на запятую, тк 3.5  в exel не катит
     $docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
 }
 
-//$docs_ids = str_replace(',', '.', $docs_ids); //запятую меняем на точку, тк , - разделитель в csv 3,5 не катит
-//$docs_ids = iconv("UTF-8", "WINDOWS-1251",  $docs_ids);
-
 $filename = 'data_export.csv';
-
-
 // Открываем файл, флаг W означает - файл открыт на запись
 $f_hdl = fopen("php://output", 'w');
 

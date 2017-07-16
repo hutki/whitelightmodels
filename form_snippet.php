@@ -54,6 +54,8 @@ $get_language = (isset($_GET['language']))?$_GET['language']:'';
 $language_class = (!empty($get_language))?"select_active":'';
 $get_abroad = (isset($_GET['abroad']))?$_GET['abroad']:'';
 $abroad_class = (!empty($get_abroad))?"select_active":'';
+$clean_p = (isset($_GET['clean_p']))?$_GET['clean_p']:'';
+$clean_p_class = (!empty($clean_p))?"active_clean":'';
 $get_expert = (isset($_GET['expert']))?$_GET['expert']:'';
 $get_client = (isset($_GET['client']))?$_GET['client']:'';
 
@@ -246,9 +248,7 @@ $result = '<div class="l_block">
 		<input type="text" name="s_id" style="width: 710px;padding: 10px;margin: 7px;font-size:17px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, или ID анкеты">
 		<button id="search" type="submit" name="sub">&#171;  Найти</button>
 	</div>
-
 </div>
-
 <select class="f_select '.$services_class.'" name="services">
 	'.$services_options.'
 </select>
@@ -344,8 +344,9 @@ $result = '<div class="l_block">
 	'.$abroad_options.'
 </select>
 <div class="dop_opt">
-	<div class="clean_inp">
-		<input  type="radio" name="clean_p" id="clean_p" value="пустые_поля"><label for="clean_p">Анкеты с пустыми<br>(незаполненными) полями</label>
+	<div class="clean_inp '.$clean_p_class.'">
+		<label class="cleanRadio" for="clean_p">Анкеты с пустыми<br>(незаполненными) полями</label>
+		<input  class="cleanRadio" type="radio" name="clean_p" id="clean_p" value="пустые_поля">
 	</div>
 	<div class="exp_inp">
 		<span>'.$tv_array['expert'].':</span>
