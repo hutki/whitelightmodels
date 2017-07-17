@@ -113,10 +113,6 @@ case 20: // Рейтинг по оценке клиента
 $tv_array['client'] = $data['name'];
 break;
 ;
-case 9: // Дата рождения
-$tv_array['age'] = $data['name'];
-break;
-;
 case 13: // Тип внешности
 $tv_array['face'][$data['name']] = $data['elements'];
 break;
@@ -276,7 +272,7 @@ $result = '<div class="l_block">
 	'.$eyes_options.'
 </select>
 <div class="block_inp">
-	<span style="width:70px;line-height: 0.75;">'.$tv_array['age'].':</span>
+	<span style="width:70px;line-height: 0.75;">Возраст:</span>
 	<div class="range_inp">
 		<input name="age1" type="number" min="1" value="'.$get_age1.'" placeholder="от"> - 
 		<input name="age2" type="number" min="1" value="'.$get_age2.'" placeholder="до">
