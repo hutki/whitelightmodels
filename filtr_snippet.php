@@ -126,6 +126,9 @@ while ($data = $result->fetch(PDO::FETCH_ASSOC))
   case 20: // Id tv параметра 'expert' 
     $docs_array[$data['contentid']]['client'] = $data['value'];
   break;
+  case 16: // Id tv параметра 'контактный номер телефона' 
+    $docs_array[$data['contentid']]['tel'] = $data['value'];
+  break;
 
 }
 }
