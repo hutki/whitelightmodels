@@ -1,6 +1,7 @@
 <?php
 // Начальное значение
 $services_options = '';
+$city_options = '';
 $face_options = '';
 $hair_options = '';
 $l_hair_options = '';
@@ -17,6 +18,7 @@ $breast_size_class = '';
 $work_class = '';
 $language_class = '';
 $abroad_class = '';
+$city_class = '';
 // Получаем значения с GET
 $get_gender = (isset($_GET['gender']))?$_GET['gender']:'';
 $s_id = (isset($_GET[s_id]))?$_GET[s_id]:'';
@@ -54,8 +56,16 @@ $get_language = (isset($_GET['language']))?$_GET['language']:'';
 $language_class = (!empty($get_language))?"select_active":'';
 $get_abroad = (isset($_GET['abroad']))?$_GET['abroad']:'';
 $abroad_class = (!empty($get_abroad))?"select_active":'';
+$get_city = (isset($_GET['city']))?$_GET['city']:'';
+$city_class = (!empty($get_city))?"select_active":'';
+$get_date_cr1 = (isset($_GET['date_cr1']))?$_GET['date_cr1']:'';
+$get_date_cr2 = (isset($_GET['date_cr2']))?$_GET['date_cr2']:'';
+$get_date_red1 = (isset($_GET['date_red1']))?$_GET['date_red1']:'';
+$get_date_red2 = (isset($_GET['date_red2']))?$_GET['date_red2']:'';
 $clean_p = (isset($_GET['clean_p']))?$_GET['clean_p']:'';
 $clean_p_class = (!empty($clean_p))?"active_clean":'';
+$new = (isset($_GET['new']))?$_GET['new']:'';
+$new_class = (!empty($new))?"active_new":'';
 $get_expert = (isset($_GET['expert']))?$_GET['expert']:'';
 $get_client = (isset($_GET['client']))?$_GET['client']:'';
 
@@ -126,6 +136,9 @@ break;
 case 33: //Цвет глаз
 $tv_array['eyes'][$data['name']] = $data['elements'];
 break;
+case 51: //new
+$tv_array['new'][$data['name']] = $data['elements'];
+break;
 case 11: //Размер груди
 $tv_array['breast_size'][$data['name']] = $data['elements'];
 break;
@@ -135,8 +148,11 @@ break;
 case 15: //Знание языков
 $tv_array['language'][$data['name']] = $data['elements'];
 break;
-case 18: //Знание языков
+case 18: //Готовность работать за границей
 $tv_array['abroad'][$data['name']] = $data['elements'];
+break;
+case 10: //город
+$tv_array['city'][$data['name']] = $data['elements'];
 break;
 }
 }
@@ -160,30 +176,46 @@ $abroad_array = array(  array('option' => '', 'val' => 'Готовность р�
             array('option' => 'Готова к работе за рубежом', 'val' => 'Готова к работе за рубежом'),
             array('option' => 'Не готова к работе за рубежом', 'val' => 'Не готова к работе за рубежом'));
 // Формируем разметку для селектов
-
+//получаем титлы услуг
 $services = $modx->getCollection('modResource',array('parent'=>4));
-/*$i  = 1;
-foreach($services as $key){
-($i == 1)?$services_options .= '<option value="" '.(('' == $get_services)?'selected':'').'>Вид работы</option>':$services_options .= '<option value="'.$key->get('pagetitle').'" '.(($key->get('pagetitle') == $get_services)?'selected':'').'>'.$key->get('pagetitle').'</option>';
-$i++;
-
-}*/
 $i  = 1;
 foreach($services as $key){
 ($i == 1)?$services_options .= '<option value="" '.(('' == $get_services)?'selected':'').'>Вид работы</option>':$services_options .= '<option value="'.$key->get('pagetitle').'" '.(($key->get('pagetitle') == $get_services)?'selected':'').'>'.$key->get('pagetitle').'</option>';
 $i++;
-
 }
+//получаем tv место проживания всех анкет, вырезаем повторения и выводим в форму
+$city_out = $modx->getCollection('modResource',array('parent'=>2));
 
-/*foreach ($tv_array['services'] as $key=> $value)$services_array .= $key."||" .$value;
-	$services_array =  explode(",", str_replace("||", ",", $services_array));
-$i  = 1;
-foreach ($services_array as $val)
+foreach($city_out as $key){
+$city_out .= $key->getTVValue('Место проживания').',';
+}
+$city_out = explode(",",$city_out);
+//функция обрезки пробелов в начале и конце строки
+function trim_value(&$value)
 {
-($i == 1)?$services_options .= '<option value="" '.(('' == $get_services)?'selected':'').'>'.$val.'</option>':$services_options .= '<option value="'.$val.'" '.(($val == $get_services)?'selected':'').'>'.$val.'</option>';
+    $value = trim($value);
+}
+array_walk($city_out, 'trim_value');
+//удаляем повторяющиеся значения
+$city_out = array_unique($city_out);
+$city_out = array_diff($city_out, array(''));
+sort($city_out);
+$i  = 1;
+foreach($city_out as $key){
+($i == 1)?$city_options .= '<option value="" '.(('' == $get_city)?'selected':'').'>Город</option>':$city_options .= '<option value="'.$key.'" '.(($key == $get_city)?'selected':'').'>'.$key.'</option>';
 $i++;
 }
+//конец место проживания
+
+/* дата создания и редактирования 
+$date_out = $modx->getCollection('modResource',array('parent'=>2));
+foreach($date_out as $key){
+$city_out .= $key->get('createdon').',';
+}
+
+echo $city_out;
 */
+
 foreach ($tv_array['face'] as $key=> $value)$face_array .= $key."||" .$value;
 	$face_array =  explode(",", str_replace("||", ",", $face_array));
 $i  = 1;
@@ -234,8 +266,11 @@ foreach ($language_array as $val)
 ($i == 1)?$language_options .= '<option value="" '.(('' == $get_language)?'selected':'').'>'.$val.'</option>':$language_options .= '<option value="'.$val.'" '.(($val == $get_language)?'selected':'').'>'.$val.'</option>';
 $i++;
 }
+
 foreach ($abroad_array as $val)
 	$abroad_options .= '<option value="'.$val['option'].'" '.(($val['option'] == $get_abroad)?'selected':'').'>'.$val['val'].'</option>';
+
+
 // формируем форму
 $result = '<div class="l_block">
 <form action="" method="get" name="model">
@@ -271,8 +306,13 @@ $result = '<div class="l_block">
 <select class="f_select '.$eyes_class.'" name="eyes">
 	'.$eyes_options.'
 </select>
+
+<div class="all_new '.$new_class.'">
+		<label class="new" for="new">Все НОВЫЕ</label>
+		<input  class="new" type="radio" name="new" id="new" value="ДА">
+	</div>
 <div class="block_inp">
-	<span style="width:70px;line-height: 0.75;">Возраст:</span>
+	<span>Возраст:</span>
 	<div class="range_inp">
 		<input name="age1" type="number" min="1" value="'.$get_age1.'" placeholder="от"> - 
 		<input name="age2" type="number" min="1" value="'.$get_age2.'" placeholder="до">
@@ -339,6 +379,23 @@ $result = '<div class="l_block">
 <select class="f_select '.$abroad_class.'" name="abroad">
 	'.$abroad_options.'
 </select>
+<select class="f_select '.$city_class.'" name="city">
+	'.$city_options.'
+</select>
+<div class="block_inp dress" style="height:61px;">
+	<span>Дата<br>создания:</span>
+	<div class="range_inp" style="width:140px;">
+		<input name="date_cr1" type="date"  value="'.$get_date_cr1.'"  style="width:140px; margin-bottom:5px;"> 
+		<input name="date_cr2" type="date"  value="'.$get_date_cr2.'"  style="width:140px">
+	</div>
+</div>
+<div class="block_inp dress" style="height:61px;">
+	<span>Дата<br>изменения:</span>
+	<div class="range_inp" style="width:140px;">
+		<input name="date_red1" type="date"  value="'.$get_date_red1.'" placeholder="от" style="width:140px; margin-bottom:5px;"> 
+		<input name="date_red2" type="date"  value="'.$get_date_red2.'" placeholder="до" style="width:140px">
+	</div>
+</div>
 <div class="dop_opt">
 	<div class="clean_inp '.$clean_p_class.'">
 		<label class="cleanRadio" for="clean_p">Анкеты с пустыми<br>(незаполненными) полями</label>

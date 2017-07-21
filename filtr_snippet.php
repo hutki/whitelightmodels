@@ -6,6 +6,7 @@ $face = (isset($_GET['face']))?$_GET['face']:'';
 $hair = (isset($_GET['hair']))?$_GET['hair']:'';
 $l_hair = (isset($_GET['l_hair']))?$_GET['l_hair']:'';
 $eyes = (isset($_GET['eyes']))?$_GET['eyes']:'';
+$new = (isset($_GET['new']))?$_GET['new']:'';
 $age1 = (isset($_GET['age1']))?$_GET['age1']:'';
 $age2 = (isset($_GET['age2']))?$_GET['age2']:'';
 $growth1 = (isset($_GET['growth1']))?$_GET['growth1']:'';
@@ -25,6 +26,16 @@ $shoes1 = (isset($_GET['shoes1']))?$_GET['shoes1']:'';
 $shoes2 = (isset($_GET['shoes2']))?$_GET['shoes2']:'';
 $work = (isset($_GET['work']))?$_GET['work']:'';
 $abroad = (isset($_GET['abroad']))?$_GET['abroad']:'';
+$city = (isset($_GET['city']))?$_GET['city']:'';
+//полученную дату переводим в уникс - сбрасываем на 00.00
+$date_cr1 = (isset($_GET['date_cr1']))?strtotime($_GET['date_cr1']):'';
+$date_cr1 = (!empty($date_cr1))?strtotime("midnight", $date_cr1):'';
+$date_cr2 = (isset($_GET['date_cr2']))?strtotime($_GET['date_cr2']):'';
+$date_cr2 = (!empty($date_cr2))?strtotime("tomorrow", $date_cr2)-1:'';
+$date_red1 = (isset($_GET['date_red1']))?strtotime($_GET['date_red1']):'';
+$date_red1 = (!empty($date_red1))?strtotime("midnight", $date_red1):'';
+$date_red2 = (isset($_GET['date_red2']))?strtotime($_GET['date_red2']):'';
+$date_red2 = (!empty($date_red2))?strtotime("tomorrow", $date_red2)-1:'';
 $language = (isset($_GET['language']))?$_GET['language']:'';
 $expert =(isset($_GET['expert']))?$_GET['expert']:'';
 $client = (isset($_GET['client']))?$_GET['client']:'';
@@ -35,81 +46,101 @@ $clean_p = (isset($_GET['clean_p']))?$_GET['clean_p']:'';
 $docs_array = array();
 
 $sql = "SELECT tmplvarid,contentid,value FROM modx_site_tmplvar_contentvalues";
+
 $result = $modx->query($sql);
 
 // Подготавливаем данные
 while ($data = $result->fetch(PDO::FETCH_ASSOC))
 {
-switch ($data['tmplvarid'])
+  switch ($data['tmplvarid'])
+  {
+  case 35: // Id tv параметра 'Фио'
+    $docs_array[$data['contentid']]['fio'] = $data['value'];
+  break;
+  case 6: // Id tv параметра 'Псевдоним'
+    $docs_array[$data['contentid']]['name'] = $data['value'];
+  break;
+  case 24: // Id tv параметра 'услуги'
+    $docs_array[$data['contentid']]['services'] = $data['value'];
+  break;
+  case 34: // Id tv параметра 'Пол'
+    $docs_array[$data['contentid']]['gender'] = $data['value'];
+  break;
+  case 13: // Id tv параметра 'Тип лица'
+    $docs_array[$data['contentid']]['face'] = $data['value'];
+  break;
+  case 31: // Id tv параметра 'Цвет волос'
+    $docs_array[$data['contentid']]['hair'] = $data['value'];
+  break;
+  case 32: // Id tv параметра 'Длина волос'
+    $docs_array[$data['contentid']]['l_hair'] = $data['value'];
+  break;
+  case 33: // Id tv параметра 'Цвет глаз'
+    $docs_array[$data['contentid']]['eyes'] = $data['value'];
+  break;
+  case 51: // Id tv параметра 'new'
+    $docs_array[$data['contentid']]['new'] = $data['value'];
+  break;
+  case 9: // Id tv параметра 'Год рождения'
+    $docs_array[$data['contentid']]['age1'] = abs((string)(round((strtotime($data['value'])-strtotime('Y'))/31536000)));
+  break;
+  case 1: // Id tv параметра 'Рост' 
+    $docs_array[$data['contentid']]['growth1'] = $data['value'];
+  break;
+  case 2: // Id tv параметра 'Грудь' 
+    $docs_array[$data['contentid']]['chest1'] = $data['value'];
+  break;
+  case 3: // Id tv параметра 'Талия' 
+    $docs_array[$data['contentid']]['waist1'] = $data['value'];
+  break;
+  case 4: // Id tv параметра 'Бедра' 
+  $docs_array[$data['contentid']]['hip1'] = $data['value'];
+  break;
+  case 47: // Id tv параметра 'Вес' 
+    $docs_array[$data['contentid']]['weight1'] = $data['value'];
+  break;
+  case 11: // Id tv параметра 'Размер груди' 
+    $docs_array[$data['contentid']]['breast_size'] = $data['value'];
+  break;
+  case 5: // Id tv параметра 'Размер одежды' 
+    $docs_array[$data['contentid']]['clothing1'] = $data['value'];
+  break;
+  case 12: // Id tv параметра 'Размер обуви' 
+    $docs_array[$data['contentid']]['shoes1'] = $data['value'];
+  break;
+  case 14: // Id tv параметра 'work' 
+    $docs_array[$data['contentid']]['work'] = $data['value'];
+  break;
+  case 18: // Id tv параметра 'abroad' 
+    $docs_array[$data['contentid']]['abroad'] = $data['value'];
+  break;
+  case 10: // Id tv параметра 'Место проживания' 
+    $docs_array[$data['contentid']]['city'] = $data['value'];
+  break;
+  case 15: // Id tv параметра 'language'
+    $docs_array[$data['contentid']]['language'] = $data['value'];
+  break;
+  case 19: // Id tv параметра 'expert' 
+    $docs_array[$data['contentid']]['expert'] = $data['value'];
+  break;
+  case 20: // Id tv параметра 'expert' 
+    $docs_array[$data['contentid']]['client'] = $data['value'];
+  break;
+
+}
+}
+
+$sql = "SELECT createdon,editedon,id,parent FROM modx_site_content WHERE parent =2";
+
+$result = $modx->query($sql);
+
+while($data = $result->fetch(PDO::FETCH_ASSOC))
 {
-case 35: // Id tv параметра 'Фио'
-$docs_array[$data['contentid']]['fio'] = $data['value'];
-break;
-case 6: // Id tv параметра 'Псевдоним'
-$docs_array[$data['contentid']]['name'] = $data['value'];
-break;
-case 24: // Id tv параметра 'услуги'
-$docs_array[$data['contentid']]['services'] = $data['value'];
-break;
-case 34: // Id tv параметра 'Пол'
-$docs_array[$data['contentid']]['gender'] = $data['value'];
-break;
-case 13: // Id tv параметра 'Тип лица'
-$docs_array[$data['contentid']]['face'] = $data['value'];
-break;
-case 31: // Id tv параметра 'Цвет волос'
-$docs_array[$data['contentid']]['hair'] = $data['value'];
-break;
-case 32: // Id tv параметра 'Длина волос'
-$docs_array[$data['contentid']]['l_hair'] = $data['value'];
-break;
-case 33: // Id tv параметра 'Цвет глаз'
-$docs_array[$data['contentid']]['eyes'] = $data['value'];
-break;
-case 9: // Id tv параметра 'Год рождения'
-$docs_array[$data['contentid']]['age1'] = abs((string)(round((strtotime($data['value'])-strtotime('Y'))/31536000)));
-break;
-case 1: // Id tv параметра 'Рост' 
-$docs_array[$data['contentid']]['growth1'] = $data['value'];
-break;
-case 2: // Id tv параметра 'Грудь' 
-$docs_array[$data['contentid']]['chest1'] = $data['value'];
-break;
-case 3: // Id tv параметра 'Талия' 
-$docs_array[$data['contentid']]['waist1'] = $data['value'];
-break;
-case 4: // Id tv параметра 'Бедра' 
-$docs_array[$data['contentid']]['hip1'] = $data['value'];
-break;
-case 47: // Id tv параметра 'Вес' 
-$docs_array[$data['contentid']]['weight1'] = $data['value'];
-break;
-case 11: // Id tv параметра 'Размер груди' 
-$docs_array[$data['contentid']]['breast_size'] = $data['value'];
-break;
-case 5: // Id tv параметра 'Размер одежды' 
-$docs_array[$data['contentid']]['clothing1'] = $data['value'];
-break;
-case 12: // Id tv параметра 'Размер обуви' 
-$docs_array[$data['contentid']]['shoes1'] = $data['value'];
-break;
-case 14: // Id tv параметра 'work' 
-$docs_array[$data['contentid']]['work'] = $data['value'];
-break;
-case 18: // Id tv параметра 'abroad' 
-$docs_array[$data['contentid']]['abroad'] = $data['value'];
-break;
-case 15: // Id tv параметра 'language'
-$docs_array[$data['contentid']]['language'] = $data['value'];
-break;
-case 19: // Id tv параметра 'expert' 
-$docs_array[$data['contentid']]['expert'] = $data['value'];
-break;
-case 20: // Id tv параметра 'expert' 
-$docs_array[$data['contentid']]['client'] = $data['value'];
-break;
+  $docs_array[$data['id']]['createdon'] = $data['createdon'];
+  $docs_array[$data['id']]['editedon'] = $data['editedon'];
 }
-}
+
+
  // Теперь у нас каждый документ имеет полный набор tv параметров!!!!
  // [10] => Array ( [face] => 175 [gender] => 3 ) [16] => Array ( [face] => 175 [gender] => 3 )
  // где 10 и 16 id доукмента
@@ -134,6 +165,8 @@ break;
   ($val['l_hair'] == $l_hair || !isset($val['l_hair']) || empty($l_hair) || !isset($l_hair)) &&
   //цвет глаз
   ($val['eyes'] == $eyes || !isset($val['eyes']) || empty($eyes) || !isset($eyes)) &&
+ //Новые
+  ($val['new'] == $new || empty($new) || !isset($new)) &&
   //возраст
    (((empty($age1) || !isset($age1)) && ($val['age1'] >= 0 && $val['age1'] <= $age2)) ||
    ((empty($age2) || !isset($age2)) && $val['age1'] >= $age1)||
@@ -180,6 +213,18 @@ break;
    ($val['work'] == $work || !isset($val['work']) || empty($work) || !isset($work)) &&
    //гастробайтер
    ($val['abroad'] == $abroad || !isset($val['abroad']) || empty($abroad) || !isset($abroad)) &&
+   //Город
+   (trim($val['city']) == $city || !isset($val['city']) || empty($city) || !isset($city)) &&
+   //дата создания
+    (((empty($date_cr1) || !isset($date_cr1)) && ($val['createdon'] >= 0 && $val['createdon'] <= $date_cr2)) ||
+   ((empty($date_cr2) || !isset($date_cr2)) && $val['createdon'] >= $date_cr1)||
+   ((empty($date_cr2) || !isset($date_cr2)) && (empty($date_cr1) || !isset($date_cr1)))||
+   ($val['createdon'] >= $date_cr1 && $val['createdon'] <= $date_cr2)) && 
+     //дата редактирования
+    (((empty($date_red1) || !isset($date_red1)) && ($val['editedon'] >= 0 && $val['editedon'] <= $date_red2)) ||
+   ((empty($date_red2) || !isset($date_red2)) && $val['editedon'] >= $date_red1)||
+   ((empty($date_red2) || !isset($date_red2)) && (empty($date_red1) || !isset($date_red1)))||
+   ($val['editedon'] >= $date_red1 && $val['editedon'] <= $date_red2)) && 
    //языки
     ((preg_match('/^(.)*'.$language.'(.)*$/uis', $val['language'])) || empty($language) || !isset($language)) &&
   //эксперт
@@ -189,9 +234,7 @@ break;
   //анкеты с пустыми полями
     ((!isset($val['language']) || !isset($val['chest1']) || !isset($val['gender']) || !isset($val['face']) || !isset($val['hair']) || !isset($val['l_hair']) || !isset($val['eyes']) || !isset($val['age1']) || !isset($val['growth1']) || !isset($val['waist1']) || !isset($val['hip1']) || !isset($val['weight1']) || !isset($val['breast_size']) || !isset($val['clothing1']) || !isset($val['shoes1']) || !isset($val['work']) || !isset($val['abroad']) || !isset($val['expert']) || !isset($val['client'])) == $clean_p || empty($clean_p) || !isset($clean_p))
     ) // Если соответствует двум параметрам сразу
-
          $docs_ids .=  $key.',';
-
  }
  //Выводим только по id
  /*if (!empty($s_id)){
@@ -202,6 +245,8 @@ break;
  // Удаляем в конце запятую
  $docs_ids = substr($docs_ids, 0, -1);
 
- // Пихаем в дитто и выводим!!!
+/*echo "<pre>";
+var_dump($date_cr1);
+echo "</pre>";*/
 
 return $docs_ids;
