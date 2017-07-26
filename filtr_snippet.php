@@ -127,7 +127,7 @@ while ($data = $result->fetch(PDO::FETCH_ASSOC))
     $docs_array[$data['contentid']]['client'] = $data['value'];
   break;
   case 16: // Id tv параметра 'контактный номер телефона' 
-    $docs_array[$data['contentid']]['tel'] = $data['value'];
+    $docs_array[$data['contentid']]['tel'] = 'т'.$data['value'];
   break;
 
 }
@@ -153,7 +153,7 @@ while($data = $result->fetch(PDO::FETCH_ASSOC))
  foreach ($docs_array as $key => $val)
  {
  if (
-  ((preg_match('/^(.)*'.$key.'(.)*$/uis',$s_id)) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio']))) &&
+  ((preg_match('/,'.$key.'/',','.$s_id)) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio']))  ||  (preg_match('/^'.$s_id.'/uis', $val['tel']))) &&
   //услуги
 
 (((empty($services) && isset($_GET['sub'])) || (!empty($services) &&(preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services']))))) &&
@@ -248,8 +248,10 @@ while($data = $result->fetch(PDO::FETCH_ASSOC))
  // Удаляем в конце запятую
  $docs_ids = substr($docs_ids, 0, -1);
 
-/*echo "<pre>";
-var_dump($date_cr1);
-echo "</pre>";*/
+/*
+echo "<pre>";
+var_dump($docs_array);
+echo "</pre>";
+*/
 
 return $docs_ids;
