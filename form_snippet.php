@@ -10,6 +10,7 @@ $breast_size_options = '';
 $work_options = '';
 $language_options = '';
 $abroad_options = '';
+$sort_options = '';
 $face_class = '';
 $hair_class = '';
 $l_hair_class = '';
@@ -19,6 +20,7 @@ $work_class = '';
 $language_class = '';
 $abroad_class = '';
 $city_class = '';
+
 // Получаем значения с GET
 $get_gender = (isset($_GET['gender']))?$_GET['gender']:'';
 $s_id = (isset($_GET[s_id]))?$_GET[s_id]:'';
@@ -68,6 +70,8 @@ $new = (isset($_GET['new']))?$_GET['new']:'';
 $new_class = (!empty($new))?"active_new":'';
 $get_expert = (isset($_GET['expert']))?$_GET['expert']:'';
 $get_client = (isset($_GET['client']))?$_GET['client']:'';
+$get_sort = (isset($_GET['sortirovka']))?$_GET['sortirovka']:'';
+$sort_class = (!empty($get_sort))?"select_active":'';
 
 // Формируем данные вывода
 
@@ -175,6 +179,15 @@ $breast_size_array = array( array('option' => '', 'val' => $tv_array['breast_siz
 $abroad_array = array(  array('option' => '', 'val' => 'Готовность работать за границей'),
             array('option' => 'Готова к работе за рубежом', 'val' => 'Готова к работе за рубежом'),
             array('option' => 'Не готова к работе за рубежом', 'val' => 'Не готова к работе за рубежом'));
+
+
+
+
+$sort_array = array(	array('option' => 'sort_name', 'val' => 'Имени (А-Я)'),
+						array('option' => 'sort_createdon', 'val' => 'Дате создания'),
+						array('option' => 'sort_editedon', 'val' => 'Дате изменения'),
+						array('option' => 'sort_reiting', 'val' => 'Рейтингу'),
+						array('option' => 'sort_id', 'val' => 'ID'));
 // Формируем разметку для селектов
 //получаем титлы услуг
 $services = $modx->getCollection('modResource',array('parent'=>4));
@@ -270,6 +283,9 @@ $i++;
 foreach ($abroad_array as $val)
 	$abroad_options .= '<option value="'.$val['option'].'" '.(($val['option'] == $get_abroad)?'selected':'').'>'.$val['val'].'</option>';
 
+foreach ($sort_array as $val)
+	$sort_options .= '<option value="'.$val['option'].'" '.(($val['option'] == $get_sort)?'selected':'').'>'.$val['val'].'</option>';
+
 
 // формируем форму
 $result = '<div class="l_block">
@@ -279,16 +295,13 @@ $result = '<div class="l_block">
 		<input type="text" name="s_id" style="width: 710px;padding: 10px;margin: 7px;font-size:17px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, ТЕЛ.(формат тXXXXXXXXXXX), или ID анкеты">
 		<button id="search" type="submit" name="sub">&#171;  Найти</button>
 	</div>
-	<div class="sortirovka" style="position: absolute;left: 589px;width: 300px;top: 22px;">
-	<span style="width: 120px;color: #ff920c;text-decoration: underline;font-size: 15px;font-weight: 300;">Сортировать по: </span>
-	 <select class="f_select " name="sortirovka" style="width: 140px;border: 1px solid #ff920c;border-radius: 0;height: 23px;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFW…zTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=) center right no-repeat #fff;">
-	<option value="sort_name" selected="">Имени (А-Я)</option>
-        <option value="sort_createdon">Дате создания</option>
-        <option value="sort_editedon">Дате изменения</option>
-        <option value="sort_reiting">Рейтингу</option>
-        <option value="sort_id">ID</option>
-      </select>
-      </div>
+	<div class="sortirovka">
+	<span>Сортировать по: </span>
+
+	<select class="f_select '.$sort_class.'" name="sortirovka">
+	'.$sort_options.'
+	</select>
+	</div>
 </div>
 
 <select class="f_select '.$services_class.'" name="services">
