@@ -45,7 +45,7 @@ $clean_p = (isset($_GET['clean_p']))?$_GET['clean_p']:'';
 
 $docs_array = array();
 
-$sql = "SELECT tmplvarid,contentid,value FROM modx_site_tmplvar_contentvalues";
+$sql = "SELECT tmplvarid,contentid,value FROM modx_site_tmplvar_contentvalues ORDER BY contentid ASC";
 
 $result = $modx->query($sql);
 
@@ -250,7 +250,7 @@ while($data = $result->fetch(PDO::FETCH_ASSOC))
 
 /*
 echo "<pre>";
-var_dump($docs_array);
+var_dump($docs_ids);
 echo "</pre>";
 */
 

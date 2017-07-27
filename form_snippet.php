@@ -276,10 +276,21 @@ $result = '<div class="l_block">
 <form action="" method="get" name="model">
 <div class="block_inp">
 	<div class="range_inp search" style="left: 270px;top: -50px;width: 869px;background: #dadada;height: 40px;">
-		<input type="text" name="s_id" style="width: 710px;padding: 10px;margin: 7px;font-size:17px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, или ID анкеты">
+		<input type="text" name="s_id" style="width: 710px;padding: 10px;margin: 7px;font-size:17px;" value="'.$s_id .'" placeholder="Введите ФИО, НИК, ТЕЛ.(формат тXXXXXXXXXXX), или ID анкеты">
 		<button id="search" type="submit" name="sub">&#171;  Найти</button>
 	</div>
+	<div class="sortirovka" style="position: absolute;left: 589px;width: 300px;top: 22px;">
+	<span style="width: 120px;color: #ff920c;text-decoration: underline;font-size: 15px;font-weight: 300;">Сортировать по: </span>
+	 <select class="f_select " name="sortirovka" style="width: 140px;border: 1px solid #ff920c;border-radius: 0;height: 23px;background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAMCAYAAABSgIzaAAAAGXRFW…zTk0D/M+KzkRGPoQSdykiKJrBGpOhgJFYTWNEIiEeAAAMAzNENEOH+do8AAAAASUVORK5CYII=) center right no-repeat #fff;">
+	<option value="sort_name" selected="">Имени (А-Я)</option>
+        <option value="sort_createdon">Дате создания</option>
+        <option value="sort_editedon">Дате изменения</option>
+        <option value="sort_reiting">Рейтингу</option>
+        <option value="sort_id">ID</option>
+      </select>
+      </div>
 </div>
+
 <select class="f_select '.$services_class.'" name="services">
 	'.$services_options.'
 </select>
