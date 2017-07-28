@@ -111,6 +111,16 @@ select.select_active{border: 1px solid rgb(255, 146, 12); box-shadow: rgb(240, 2
 .tel_print p {font-size: 25px;margin: 0;}
 .print {padding-bottom: 0} 
 .print header {margin-bottom:0;}
+
+input[type="date"]:before {
+    content: attr(placeholder) !important;
+    color: #aaa;
+    margin-right: 0.5em;
+  }
+  input[type="date"]:focus:before,
+  input[type="date"]:valid:before {
+    content: "";
+  }
 .service_print {
 	float: left;
 	font-weight: 400;

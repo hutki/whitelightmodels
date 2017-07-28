@@ -408,16 +408,16 @@ $result = '<div class="l_block">
 </select>
 <div class="block_inp dress" style="height:61px;">
 	<span>Дата<br>создания:</span>
-	<div class="range_inp" style="width:140px;">
-		<input name="date_cr1" type="date"  value="'.$get_date_cr1.'"  style="width:140px; margin-bottom:5px;"> 
-		<input name="date_cr2" type="date"  value="'.$get_date_cr2.'"  style="width:140px">
+	<div class="range_inp" style="width:170px;">
+		<input name="date_cr1" type="date"  value="'.$get_date_cr1.'"  placeholder="от" style="width:170px; margin-bottom:5px;" > 
+		<input name="date_cr2" type="date"  value="'.$get_date_cr2.'"  placeholder="до" style="width:170px">
 	</div>
 </div>
 <div class="block_inp dress" style="height:61px;">
 	<span>Дата<br>изменения:</span>
-	<div class="range_inp" style="width:140px;">
-		<input name="date_red1" type="date"  value="'.$get_date_red1.'" placeholder="от" style="width:140px; margin-bottom:5px;"> 
-		<input name="date_red2" type="date"  value="'.$get_date_red2.'" placeholder="до" style="width:140px">
+	<div class="range_inp" style="width:170px;">
+		<input name="date_red1" type="date"  value="'.$get_date_red1.'" placeholder="от" style="width:170px; margin-bottom:5px;"> 
+		<input name="date_red2" type="date"  value="'.$get_date_red2.'" placeholder="до" style="width:170px">
 	</div>
 </div>
 <div class="dop_opt">

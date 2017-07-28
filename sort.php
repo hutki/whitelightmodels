@@ -1,9 +1,10 @@
 <?php
+<?php
 $sort = (isset($_GET['sortirovka']))?$_GET['sortirovka']:'';
 
 
 $output = '';
-$sort = $sort;
+
 $x= $sort;
 switch ($x) {
 case "sort_name":
@@ -16,12 +17,13 @@ case "sort_editedon":
    $output ="editedon";
     break;
 case "sort_reiting":
-   $output ="+tv.Рейтинг модели по оценке эксперта";
+   $output ="Рейтинг модели по оценке эксперта";
     break;
-	case "sort_id":
+  case "sort_id":
    $output ="id";
     break;
 }
+$output = ($sort == 'sort_reiting')?'&sortbyTV=`'.$output.'`':'&sortby=`{"'.$output.'":"ASC"}`';
 
- 
-return $output;
+
+ return $output;
