@@ -1,6 +1,10 @@
 <?php
 $s_id = (isset($_GET['s_id']))?$_GET['s_id']:'';
 $services = (isset($_GET['services']))?$_GET['services']:'';
+foreach ($services as $value)
+$services .= $value.'\||';
+$services = rtrim ($services, "\|");
+$services = ltrim ($services, "Array");
 $gender = (isset($_GET['gender']))?$_GET['gender']:'';
 $face = (isset($_GET['face']))?$_GET['face']:'';
 $hair = (isset($_GET['hair']))?$_GET['hair']:'';
@@ -39,6 +43,7 @@ $date_red2 = (!empty($date_red2))?strtotime("tomorrow", $date_red2)-1:'';
 $language = (isset($_GET['language']))?$_GET['language']:'';
 $expert =(isset($_GET['expert']))?$_GET['expert']:'';
 $client = (isset($_GET['client']))?$_GET['client']:'';
+$black_list = (isset($_GET['black_list']))?$_GET['black_list']:'';
 $clean_p = (isset($_GET['clean_p']))?$_GET['clean_p']:'';
 
 //----------------------------------------------------------------------------
@@ -80,6 +85,9 @@ while ($data = $result->fetch(PDO::FETCH_ASSOC))
   break;
   case 51: // Id tv параметра 'new'
     $docs_array[$data['contentid']]['new'] = $data['value'];
+  break;
+   case 49: // Id tv параметра 'black_list'
+    $docs_array[$data['contentid']]['black_list'] = $data['value'];
   break;
   case 9: // Id tv параметра 'Год рождения'
     $docs_array[$data['contentid']]['age1'] = abs((string)(round((strtotime($data['value'])-strtotime('Y'))/31536000)));
@@ -144,21 +152,26 @@ while($data = $result->fetch(PDO::FETCH_ASSOC))
 }
 
 
- // Теперь у нас каждый документ имеет полный набор tv параметров!!!!
- // [10] => Array ( [face] => 175 [gender] => 3 ) [16] => Array ( [face] => 175 [gender] => 3 )
- // где 10 и 16 id доукмента
-
  // Выполняем выборку в соответствии с фильтрами
     $docs_ids = '';
  foreach ($docs_array as $key => $val)
  {
  if (
-  ((preg_match('/,'.$key.'/',','.$s_id)) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) || (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio']))  ||  (preg_match('/^\+'.$s_id.'/uis', $val['tel']))) &&
-  //услуги
+ //поиск по id(\s - любой символ пробела), имени, фамилии, телефону
+/*
+исходный код
+((preg_match('/,'.$key.'/',','.$s_id)) ||
+  (preg_match('/\s'.$key.'/',' '.$s_id)) || 
+*/
 
-(((empty($services) && isset($_GET['sub'])) || (!empty($services) &&(preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services']))))) &&
-   //((!empty($services) && (preg_match('/^(.)*'.$services.'(.)*$/uis', $val['services'])))) &&
-  //пол
+  ((preg_match_all('/,'.$key.'/',','.$s_id)) ||
+  (preg_match_all('/\s'.$key.'/',' '.$s_id)) || 
+  (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['name'])) ||
+  (preg_match('/^(.)*'.$s_id.'(.)*$/uis', $val['fio']))  ||
+  (preg_match('/^\+'.$s_id.'$/uis', $val['tel']))) &&
+  //услуги
+(((empty($services) && isset($_GET['sub'])) || (!empty($services) && (preg_match_all('/'.$services.'/', $val['services']))))) &&
+   //пол
   ($val['gender'] == $gender || !isset($val['gender']) || empty($gender) || !isset($gender)) &&
   //тип лица
   ($val['face'] == $face || !isset($val['face']) || empty($face) || !isset($face)) &&
@@ -170,6 +183,8 @@ while($data = $result->fetch(PDO::FETCH_ASSOC))
   ($val['eyes'] == $eyes || !isset($val['eyes']) || empty($eyes) || !isset($eyes)) &&
  //Новые
   ($val['new'] == $new || empty($new) || !isset($new)) &&
+  //Черный список
+  ($val['black_list'] == $black_list || empty($black_list) || !isset($black_list)) &&
   //возраст
    (((empty($age1) || !isset($age1)) && ($val['age1'] >= 0 && $val['age1'] <= $age2)) ||
    ((empty($age2) || !isset($age2)) && $val['age1'] >= $age1)||
@@ -201,7 +216,7 @@ while($data = $result->fetch(PDO::FETCH_ASSOC))
      ((empty($weight2) || !isset($weight2)) && (empty($weight1) || !isset($weight1)))||
      ($val['weight1'] >= $weight1 && $val['weight1'] <= $weight2)) &&
   //размер груди
-   ($val['breast_size'] == $breast_size || !isset($val['breast_size']) || empty($breast_size) || !isset($breast_size)) &&
+   ($val['breast_size'] == $breast_size || empty($breast_size) || !isset($breast_size)) &&
   //размер одежды
   (((empty($clothing1) || !isset($clothing1)) && ($val['clothing1'] >= 0 && $val['clothing1'] <= $clothing2)) ||
      ((empty($clothing2) || !isset($clothing2)) && $val['clothing1'] >= $clothing1)||
@@ -236,22 +251,17 @@ while($data = $result->fetch(PDO::FETCH_ASSOC))
     ($val['client'] == $client || !isset($val['client']) || empty($client) || !isset($client)) &&
   //анкеты с пустыми полями
     ((!isset($val['language']) || !isset($val['chest1']) || !isset($val['gender']) || !isset($val['face']) || !isset($val['hair']) || !isset($val['l_hair']) || !isset($val['eyes']) || !isset($val['age1']) || !isset($val['growth1']) || !isset($val['waist1']) || !isset($val['hip1']) || !isset($val['weight1']) || !isset($val['breast_size']) || !isset($val['clothing1']) || !isset($val['shoes1']) || !isset($val['work']) || !isset($val['abroad']) || !isset($val['expert']) || !isset($val['client'])) == $clean_p || empty($clean_p) || !isset($clean_p))
-    ) // Если соответствует двум параметрам сразу
+    ) 
          $docs_ids .=  $key.',';
  }
- //Выводим только по id
- /*if (!empty($s_id)){
-   $docs_ids .= $s_id.',';
- }
-*/
- 
+
  // Удаляем в конце запятую
  $docs_ids = substr($docs_ids, 0, -1);
-
 /*
-echo "<pre>";
-var_dump($docs_ids);
-echo "</pre>";
+echo "<pre>"; 
+var_dump($services);
+echo "</pre>"; 
 */
+
 
 return $docs_ids;
